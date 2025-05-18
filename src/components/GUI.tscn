@@ -1,0 +1,177 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/GUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/403970123_203114046100340_6409654091407568398_n.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/star/star2.png" type="Texture" id=3]
+[ext_resource path="res://assets/Screenshot 2025-05-16 225126.png" type="Texture" id=4]
+
+[node name="GUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+score_to_complete_level = 150
+
+[node name="HealthBar" type="TextureProgress" parent="."]
+margin_right = 223.0
+margin_bottom = 91.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 4 )
+tint_under = Color( 0.156863, 0.054902, 0.054902, 1 )
+tint_progress = Color( 0.85098, 0.0784314, 0.0784314, 1 )
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.056
+anchor_right = 0.5
+anchor_bottom = 0.056
+margin_left = -290.0
+margin_top = -11.32
+margin_right = -176.0
+margin_bottom = 28.68
+
+[node name="ProgressBar" type="TextureProgress" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -207.5
+margin_right = 207.5
+margin_bottom = 519.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 2 )
+tint_under = Color( 0.65098, 0.243137, 0.243137, 1 )
+tint_progress = Color( 0.156863, 0.643137, 0.2, 1 )
+
+[node name="HSlider" type="HSlider" parent="."]
+visible = false
+margin_left = 121.0
+margin_top = 165.0
+margin_right = 368.0
+margin_bottom = 181.0
+
+[node name="Star2" type="Sprite" parent="."]
+position = Vector2( 226, 452 )
+scale = Vector2( 0.174, 0.174 )
+texture = ExtResource( 3 )
+
+[node name="Star3" type="Sprite" parent="."]
+position = Vector2( 377, 457 )
+scale = Vector2( 0.174, 0.174 )
+texture = ExtResource( 3 )
+
+[node name="Star4" type="Sprite" parent="."]
+position = Vector2( 521, 473 )
+scale = Vector2( 0.174, 0.174 )
+texture = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="LevelComplete" type="CanvasLayer" parent="."]
+pause_mode = 2
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="LevelComplete"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -196.0
+margin_right = 150.0
+margin_bottom = 196.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelComplete/PanelContainer"]
+pause_mode = 2
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 385.0
+
+[node name="PanelContainer" type="PanelContainer" parent="LevelComplete/PanelContainer/VBoxContainer"]
+margin_right = 286.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="LevelComplete/PanelContainer/VBoxContainer/PanelContainer"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Level Complete"
+
+[node name="Restart" type="Button" parent="LevelComplete/PanelContainer/VBoxContainer"]
+pause_mode = 2
+margin_top = 18.0
+margin_right = 286.0
+margin_bottom = 38.0
+text = "Restart"
+
+[node name="Continue" type="Button" parent="LevelComplete/PanelContainer/VBoxContainer"]
+pause_mode = 2
+margin_top = 42.0
+margin_right = 286.0
+margin_bottom = 62.0
+text = "Continue"
+
+[node name="MainMenu" type="Button" parent="LevelComplete/PanelContainer/VBoxContainer"]
+pause_mode = 2
+margin_top = 66.0
+margin_right = 286.0
+margin_bottom = 86.0
+text = "MainMenu"
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+pause_mode = 2
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="GameOver"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -196.0
+margin_right = 150.0
+margin_bottom = 196.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver/PanelContainer"]
+pause_mode = 2
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 385.0
+
+[node name="PanelContainer" type="PanelContainer" parent="GameOver/PanelContainer/VBoxContainer"]
+margin_right = 286.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="GameOver/PanelContainer/VBoxContainer/PanelContainer"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Game Over"
+
+[node name="Restart" type="Button" parent="GameOver/PanelContainer/VBoxContainer"]
+pause_mode = 2
+margin_top = 18.0
+margin_right = 286.0
+margin_bottom = 38.0
+text = "Restart"
+
+[node name="Continue" type="Button" parent="GameOver/PanelContainer/VBoxContainer"]
+pause_mode = 2
+visible = false
+margin_top = 42.0
+margin_right = 286.0
+margin_bottom = 62.0
+text = "Continue"
+
+[node name="MainMenu" type="Button" parent="GameOver/PanelContainer/VBoxContainer"]
+pause_mode = 2
+margin_top = 66.0
+margin_right = 286.0
+margin_bottom = 86.0
+text = "MainMenu"
+
+[connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="GameOver/PanelContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="GameOver/PanelContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="GameOver/PanelContainer/VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]

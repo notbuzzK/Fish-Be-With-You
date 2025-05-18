@@ -1,0 +1,23 @@
+[gd_scene format=2]
+
+[node name="ChangeAppearance" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+
+[node name="Next" type="Button" parent="Control"]
+anchor_right = 31.994
+anchor_bottom = 18.025
+margin_left = 521.0
+margin_top = 372.0
+margin_right = 600.0
+margin_bottom = 445.0
+text = "Next"
+
+[node name="Previous" type="Button" parent="Control"]
+anchor_right = 31.994
+anchor_bottom = 18.025
+margin_left = 275.0
+margin_top = 380.0
+margin_right = 354.0
+margin_bottom = 453.0
+text = "Previous"

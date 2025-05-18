@@ -6,7 +6,8 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 36.71
 
-[node name="Fishda" type="KinematicBody2D"]
+[node name="Fishda" type="KinematicBody2D" groups=["player"]]
+scale = Vector2( 0.05, 0.05 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -16,3 +17,11 @@ texture = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 1.407, 1 )
 shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DamageCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
