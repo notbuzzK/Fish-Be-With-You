@@ -21,3 +21,10 @@ margin_top = 380.0
 margin_right = 354.0
 margin_bottom = 453.0
 text = "Previous"
+
+[node name="Button" type="Button" parent="Control"]
+margin_left = 373.0
+margin_top = 535.0
+margin_right = 499.0
+margin_bottom = 597.0
+text = "Save"

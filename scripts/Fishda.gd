@@ -1,6 +1,14 @@
 # Fishda.gd
 extends KinematicBody2D
 
+var kanwfiawn = [{
+		index = 1,
+		some_text = 'dawdadadwa'
+	}, {
+		index = 2,
+		some_text = 'safwafwafawaf'
+	}]
+
 # ALL "GLOBAL" CODE CHECK GLOBAL.GD SCRIPT
 # global.gd is literally a global script used for state management across different files
 
@@ -26,6 +34,11 @@ onready var collision_shape = $CollisionShape2D
 onready var speed_buff_timer = $Timer
 onready var damage_cooldown_timer = $DamageCooldownTimer
 
+# How often Fishda can attempt to bite the boss (seconds)
+export var BOSS_BITE_COOLDOWN_TIME: float = 1.0 
+var can_bite_boss: bool = true
+onready var boss_bite_cooldown_timer = $BossBiteCooldownTimer
+
 func _ready():
 	reset_player_state()
 	Global.connect("player_died", self, "_on_player_died")
@@ -35,6 +48,12 @@ func _ready():
 			damage_cooldown_timer.connect("timeout", self, "_on_DamageCooldownTimer_timeout")
 	else:
 		print_debug("ERROR: DamageCooldownTimer node not found on Fishda!")
+	
+	if boss_bite_cooldown_timer: # Check if node exists
+		boss_bite_cooldown_timer.connect("timeout", self, "_on_BossBiteCooldownTimer_timeout")
+	else:
+		print_debug("WARNING (Fishda): BossBiteCooldownTimer node not found! Add it as a child of Fishda.")
+
 
 # self explanatory
 func reset_player_state():
@@ -44,6 +63,10 @@ func reset_player_state():
 	can_take_eat_attempt_damage = true # Reset damage cooldown flag
 	if damage_cooldown_timer and not damage_cooldown_timer.is_stopped(): # Check if timer exists and is running
 		damage_cooldown_timer.stop() # Stop timer if it was running from a previous state
+	
+	can_bite_boss = true # Player can bite at the start
+	if is_instance_valid(boss_bite_cooldown_timer) and not boss_bite_cooldown_timer.is_stopped():
+		boss_bite_cooldown_timer.stop()
 
 
 func _physics_process(_delta):
@@ -152,6 +175,10 @@ func apply_speed_buff(multiplier: float, duration: float):
 # dito niyo ilalagay yung logic for debuffs (
 # yung timer and +time buff sa Global.gd ilalaga yun
 
+# func slowdown():
+#	SlowDownTimer.start()
+#	
+
 func _on_Timer_timeout(): # This function name MUST match the signal connection for the speed_buff_timer
 	print("Speed buff expired.")
 	current_speed_multiplier = 1.0
@@ -161,3 +188,35 @@ func _on_Timer_timeout(): # This function name MUST match the signal connection 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		apply_speed_buff(2.0, 5.0)
+
+# This function is called BY THE BOSS (from _on_boss_bitten_by_player)
+# when Fishda collides with the Boss
+func attempt_damage_entity(entity_to_damage: Node): # entity_to_damage will be the boss instance
+	if not entity_to_damage.is_in_group("bosses"): # Or check class name if boss has one
+		return # Not trying to damage a boss
+
+	if can_bite_boss:
+		print("Fishda attempts to bite boss!")
+		# Conditions for a successful bite (e.g., player size, facing direction - optional)
+		var bite_successful = true # Assume success for now
+
+		if bite_successful:
+			if entity_to_damage.has_method("receive_bite_damage"):
+				entity_to_damage.receive_bite_damage() # Tell the boss it was bitten
+				
+				can_bite_boss = false # Start cooldown
+				if is_instance_valid(boss_bite_cooldown_timer):
+					boss_bite_cooldown_timer.start()
+				else: # Fallback if timer isn't there, effectively no cooldown
+					can_bite_boss = true 
+					print_debug("Fishda: BossBiteCooldownTimer missing, bite cooldown not activated.")
+
+				# Play bite animation/sound for Fishda
+		# else:
+			# Play "failed bite" sound or some visual cues
+	else:
+		print("Fishda cannot bite boss yet (cooldown).")
+
+func _on_BossBiteCooldownTimer_timeout():
+	can_bite_boss = true
+	print("boss can be bitten again")

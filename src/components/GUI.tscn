@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/GUI.gd" type="Script" id=1]
-[ext_resource path="res://assets/403970123_203114046100340_6409654091407568398_n.jpg" type="Texture" id=2]
 [ext_resource path="res://assets/star/star2.png" type="Texture" id=3]
 [ext_resource path="res://assets/Screenshot 2025-05-16 225126.png" type="Texture" id=4]
 
@@ -11,32 +10,35 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 score_to_complete_level = 150
 
-[node name="HealthBar" type="TextureProgress" parent="."]
-margin_right = 223.0
-margin_bottom = 91.0
-texture_under = ExtResource( 4 )
-texture_progress = ExtResource( 4 )
-tint_under = Color( 0.156863, 0.054902, 0.054902, 1 )
-tint_progress = Color( 0.85098, 0.0784314, 0.0784314, 1 )
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 105.0
+one_shot = true
+autostart = true
+
+[node name="TimeLeft" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -80.0
+margin_top = 95.0
+margin_right = 80.0
+margin_bottom = 151.0
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchor_left = 0.5
-anchor_top = 0.056
 anchor_right = 0.5
-anchor_bottom = 0.056
-margin_left = -290.0
-margin_top = -11.32
-margin_right = -176.0
-margin_bottom = 28.68
+margin_left = -375.0
+margin_top = 54.0
+margin_right = -261.0
+margin_bottom = 94.0
 
 [node name="ProgressBar" type="TextureProgress" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -207.5
-margin_right = 207.5
-margin_bottom = 519.0
-texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 2 )
+margin_left = -207.0
+margin_right = 208.0
+margin_bottom = 30.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 4 )
 tint_under = Color( 0.65098, 0.243137, 0.243137, 1 )
 tint_progress = Color( 0.156863, 0.643137, 0.2, 1 )
 
@@ -47,19 +49,55 @@ margin_top = 165.0
 margin_right = 368.0
 margin_bottom = 181.0
 
-[node name="Star2" type="Sprite" parent="."]
-position = Vector2( 226, 452 )
-scale = Vector2( 0.174, 0.174 )
+[node name="HealthBar" type="TextureProgress" parent="."]
+visible = false
+margin_right = 383.0
+margin_bottom = 91.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 4 )
+tint_under = Color( 0.156863, 0.054902, 0.054902, 1 )
+tint_progress = Color( 0.85098, 0.0784314, 0.0784314, 1 )
+
+[node name="Hearts" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Heart1" type="Sprite" parent="Hearts"]
+position = Vector2( 70, 22 )
+scale = Vector2( 0.048, 0.048 )
 texture = ExtResource( 3 )
 
-[node name="Star3" type="Sprite" parent="."]
-position = Vector2( 377, 457 )
-scale = Vector2( 0.174, 0.174 )
+[node name="Star5" type="Sprite" parent="Hearts"]
+position = Vector2( 185, 22 )
+scale = Vector2( 0.048, 0.048 )
 texture = ExtResource( 3 )
 
-[node name="Star4" type="Sprite" parent="."]
-position = Vector2( 521, 473 )
-scale = Vector2( 0.174, 0.174 )
+[node name="Star6" type="Sprite" parent="Hearts"]
+position = Vector2( 310, 22 )
+scale = Vector2( 0.048, 0.048 )
+texture = ExtResource( 3 )
+
+[node name="Stars" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( -33, -245 )
+
+[node name="Star1" type="Sprite" parent="Stars"]
+position = Vector2( -91, 64 )
+scale = Vector2( 0.048, 0.048 )
+texture = ExtResource( 3 )
+
+[node name="Star2" type="Sprite" parent="Stars"]
+position = Vector2( 24, 64 )
+scale = Vector2( 0.048, 0.048 )
+texture = ExtResource( 3 )
+
+[node name="Star3" type="Sprite" parent="Stars"]
+position = Vector2( 149, 64 )
+scale = Vector2( 0.048, 0.048 )
 texture = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -85,35 +123,53 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 293.0
 margin_bottom = 385.0
+rect_clip_content = true
 
 [node name="PanelContainer" type="PanelContainer" parent="LevelComplete/PanelContainer/VBoxContainer"]
 margin_right = 286.0
-margin_bottom = 14.0
+margin_bottom = 28.0
 
 [node name="Label" type="Label" parent="LevelComplete/PanelContainer/VBoxContainer/PanelContainer"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 279.0
+margin_bottom = 21.0
 text = "Level Complete"
+
+[node name="Star1" type="Sprite" parent="LevelComplete/PanelContainer/VBoxContainer/PanelContainer"]
+position = Vector2( 32, 25 )
+scale = Vector2( 0.048, 0.048 )
+texture = ExtResource( 3 )
+
+[node name="Star2" type="Sprite" parent="LevelComplete/PanelContainer/VBoxContainer/PanelContainer"]
+position = Vector2( 147, 25 )
+scale = Vector2( 0.048, 0.048 )
+texture = ExtResource( 3 )
+
+[node name="Star3" type="Sprite" parent="LevelComplete/PanelContainer/VBoxContainer/PanelContainer"]
+position = Vector2( 272, 25 )
+scale = Vector2( 0.048, 0.048 )
+texture = ExtResource( 3 )
 
 [node name="Restart" type="Button" parent="LevelComplete/PanelContainer/VBoxContainer"]
 pause_mode = 2
-margin_top = 18.0
+margin_top = 32.0
 margin_right = 286.0
-margin_bottom = 38.0
+margin_bottom = 52.0
 text = "Restart"
 
 [node name="Continue" type="Button" parent="LevelComplete/PanelContainer/VBoxContainer"]
 pause_mode = 2
-margin_top = 42.0
+margin_top = 56.0
 margin_right = 286.0
-margin_bottom = 62.0
+margin_bottom = 76.0
 text = "Continue"
 
 [node name="MainMenu" type="Button" parent="LevelComplete/PanelContainer/VBoxContainer"]
 pause_mode = 2
-margin_top = 66.0
+margin_top = 80.0
 margin_right = 286.0
-margin_bottom = 86.0
+margin_bottom = 100.0
 text = "MainMenu"
 
 [node name="GameOver" type="CanvasLayer" parent="."]
@@ -140,18 +196,20 @@ margin_bottom = 385.0
 
 [node name="PanelContainer" type="PanelContainer" parent="GameOver/PanelContainer/VBoxContainer"]
 margin_right = 286.0
-margin_bottom = 14.0
+margin_bottom = 28.0
 
 [node name="Label" type="Label" parent="GameOver/PanelContainer/VBoxContainer/PanelContainer"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 279.0
+margin_bottom = 21.0
 text = "Game Over"
 
 [node name="Restart" type="Button" parent="GameOver/PanelContainer/VBoxContainer"]
 pause_mode = 2
-margin_top = 18.0
+margin_top = 32.0
 margin_right = 286.0
-margin_bottom = 38.0
+margin_bottom = 52.0
 text = "Restart"
 
 [node name="Continue" type="Button" parent="GameOver/PanelContainer/VBoxContainer"]
@@ -164,9 +222,9 @@ text = "Continue"
 
 [node name="MainMenu" type="Button" parent="GameOver/PanelContainer/VBoxContainer"]
 pause_mode = 2
-margin_top = 66.0
+margin_top = 56.0
 margin_right = 286.0
-margin_bottom = 86.0
+margin_bottom = 76.0
 text = "MainMenu"
 
 [connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]

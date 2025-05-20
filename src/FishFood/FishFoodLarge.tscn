@@ -11,6 +11,7 @@ script = ExtResource( 2 )
 value = 20
 fish_food_size_category = 2
 growth_points = 15
+damage_if_too_small = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

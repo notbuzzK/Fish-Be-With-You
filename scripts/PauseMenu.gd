@@ -1,6 +1,8 @@
 # PauseMenu.gd
 extends Control
 
+onready var settings_scene = $Settings
+
 func _ready():
 	visible = false # Start hidden
 	# $AnimationPlayer.play("RESET") # You might not need RESET if it starts hidden
@@ -48,6 +50,8 @@ func _on_Restart_pressed():
 
 func _on_Settings_pressed():
 	print("Settings button pressed (from Pause Menu)")
+	settings_scene.visible = true
+	
 
 func _on_Quit_pressed():
 	Global.reset_score() # Good practice

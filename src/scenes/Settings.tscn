@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/scenes/SettingsMenu.gd" type="Script" id=1]
+[ext_resource path="res://scripts/SettingsMenu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/ChangeControls.gd" type="Script" id=2]
 
 [node name="Settings" type="Control"]
@@ -62,5 +62,13 @@ margin_top = 20.0
 margin_right = 306.0
 margin_bottom = 34.0
 
+[node name="Button" type="Button" parent="."]
+margin_left = 23.0
+margin_top = 16.0
+margin_right = 116.0
+margin_bottom = 67.0
+text = "Back"
+
 [connection signal="toggled" from="PanelContainer/VBoxContainer/FullScreenbutton" to="." method="_on_FullScreenbutton_toggled"]
 [connection signal="item_selected" from="PanelContainer/VBoxContainer/ChangeControls" to="PanelContainer/VBoxContainer/ChangeControls" method="_on_ChangeControls_item_selected"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

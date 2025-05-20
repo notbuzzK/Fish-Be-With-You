@@ -1,19 +1,17 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/buttons/btn2-state1.png" type="Texture" id=1]
 [ext_resource path="res://assets/buttons/btn1-state1.png" type="Texture" id=2]
 [ext_resource path="res://assets/buttons/btn1-state2.png" type="Texture" id=3]
-[ext_resource path="res://scripts/NewGame.gd" type="Script" id=4]
+[ext_resource path="res://scripts/MainMenu.gd" type="Script" id=4]
 [ext_resource path="res://assets/buttons/btn2-state2.png" type="Texture" id=5]
-[ext_resource path="res://scripts/LoadGame.gd" type="Script" id=6]
+[ext_resource path="res://assets/403970123_203114046100340_6409654091407568398_n.jpg" type="Texture" id=6]
 [ext_resource path="res://assets/buttons/btn3-state1.png" type="Texture" id=7]
 [ext_resource path="res://assets/buttons/btn3-state2.png" type="Texture" id=8]
-[ext_resource path="res://scripts/ChangeAppearance.gd" type="Script" id=9]
-[ext_resource path="res://scripts/Settings.gd" type="Script" id=10]
 [ext_resource path="res://assets/buttons/settings-txt.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 414, 220 )
 
 [sub_resource type="StyleBoxTexture" id=2]
@@ -61,6 +59,7 @@ region_rect = Rect2( 0, 0, 300, 170 )
 [sub_resource type="ButtonGroup" id=12]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 1280.0
@@ -77,7 +76,6 @@ rect_clip_content = true
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
-script = ExtResource( 4 )
 
 [node name="LoadGame" type="Button" parent="Control"]
 anchor_right = 1.0
@@ -89,7 +87,6 @@ margin_bottom = -273.0
 custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 5 )
 custom_styles/normal = SubResource( 6 )
-script = ExtResource( 6 )
 
 [node name="ChangeAppearance" type="Button" parent="Control"]
 anchor_right = 1.0
@@ -101,7 +98,6 @@ margin_bottom = -277.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/normal = SubResource( 9 )
-script = ExtResource( 9 )
 
 [node name="Settings" type="Button" parent="Control"]
 anchor_right = 1.0
@@ -114,9 +110,24 @@ custom_styles/hover = SubResource( 10 )
 custom_styles/pressed = SubResource( 11 )
 custom_styles/normal = SubResource( 13 )
 group = SubResource( 12 )
-script = ExtResource( 10 )
 
-[connection signal="pressed" from="Control/NewGame" to="Control/NewGame" method="_on_Button_pressed"]
-[connection signal="pressed" from="Control/LoadGame" to="Control/LoadGame" method="_on_LoadGame_pressed"]
-[connection signal="pressed" from="Control/ChangeAppearance" to="Control/ChangeAppearance" method="_on_ChangeAppearance_pressed"]
-[connection signal="pressed" from="Control/Settings" to="Control/Settings" method="_on_Settings_pressed"]
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ChangeTextureOfThis" type="Sprite" parent="BG"]
+visible = false
+position = Vector2( 208, 262 )
+texture = ExtResource( 6 )
+
+[node name="FG" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="ChangeTextureOfThis" type="Sprite" parent="FG"]
+visible = false
+position = Vector2( 208, 262 )
+texture = ExtResource( 6 )
+
+[connection signal="pressed" from="Control/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="Control/LoadGame" to="." method="_on_LoadGame_pressed"]
+[connection signal="pressed" from="Control/ChangeAppearance" to="." method="_on_ChangeAppearance_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_Settings_pressed"]

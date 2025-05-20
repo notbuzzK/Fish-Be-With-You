@@ -7,6 +7,7 @@
 
 [node name="FishFoodSmall" type="Area2D"]
 script = ExtResource( 2 )
+damage_if_too_small = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.03, 0.03 )

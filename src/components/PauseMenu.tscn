@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=1]
+[ext_resource path="res://src/scenes/Settings.tscn" type="PackedScene" id=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -126,6 +127,10 @@ root_node = NodePath("../ColorRect")
 autoplay = "RESET"
 anims/RESET = SubResource( 3 )
 anims/blur = SubResource( 4 )
+
+[node name="Settings" parent="." instance=ExtResource( 2 )]
+visible = false
+used_in_main_menu = false
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]

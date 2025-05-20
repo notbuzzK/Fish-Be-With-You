@@ -8,6 +8,7 @@ extents = Vector2( 250, 1289 )
 [node name="FishFoodSpawnArea" type="Node2D"]
 
 [node name="PlayArea" parent="." instance=ExtResource( 1 )]
+visible = false
 
 [node name="EnemySpawnArea" type="Area2D" parent="."]
 

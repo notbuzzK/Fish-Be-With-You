@@ -15,3 +15,4 @@ func _process(_delta):
 		global_position = target.global_position
 	# else:
 		# edge cases i have yet to experience
+
