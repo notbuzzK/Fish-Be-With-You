@@ -13,7 +13,7 @@ var kanwfiawn = [{
 # global.gd is literally a global script used for state management across different files
 
 # Player Size & Growth
-var current_size_points: int = 0
+
 var current_visual_scale: float = 1.0 
 const MIN_VISUAL_SCALE: float = 0.5 
 const MAX_VISUAL_SCALE: float = 5.0 # Example max visual size
@@ -57,7 +57,7 @@ func _ready():
 
 # self explanatory
 func reset_player_state():
-	current_size_points = 0
+	Global.current_size_points = 0
 	current_visual_scale = 1.0
 	update_visual_size()
 	can_take_eat_attempt_damage = true # Reset damage cooldown flag
@@ -93,8 +93,8 @@ func _physics_process(_delta):
 # when called, will multiply accepted amount to scale factor growth
 # which in turn will make player visually grow
 func grow(amount: int):
-	current_size_points += amount
-	current_visual_scale = 1.0 + (current_size_points * SCALE_FACTOR_PER_GROWTH_POINT)
+	Global.current_size_points += amount
+	current_visual_scale = 1.0 + (Global.current_size_points * SCALE_FACTOR_PER_GROWTH_POINT)
 	current_visual_scale = clamp(current_visual_scale, MIN_VISUAL_SCALE, MAX_VISUAL_SCALE)
 	update_visual_size()
 
@@ -124,13 +124,13 @@ func attempt_eat_food(food_item: BaseFishFood):
 		Global.FishSize.SMOL:
 			can_eat = true # Player can always eat smol food
 		Global.FishSize.MEDIUM:
-			if current_size_points >= Global.CAN_EAT_MEDIUM_THRESHOLD:
+			if Global.current_size_points >= Global.CAN_EAT_MEDIUM_THRESHOLD:
 				can_eat = true
 		Global.FishSize.LARGE:
-			if current_size_points >= Global.CAN_EAT_LARGE_THRESHOLD:
+			if Global.current_size_points >= Global.CAN_EAT_LARGE_THRESHOLD:
 				can_eat = true
 		# Global.FishSize.BOSS: # Example for future
-			# if current_size_points >= CAN_EAT_BOSS_THRESHOLD:
+			# if Global.current_size_points >= CAN_EAT_BOSS_THRESHOLD:
 			# 	can_eat = true
 
 
@@ -138,7 +138,7 @@ func attempt_eat_food(food_item: BaseFishFood):
 		Global.add_score(food_item.value)
 		grow(food_item.growth_points)
 		# wag niyo na intindihin tong nasa baba basta for logging lang to hahahaha
-		print("Fishda ate %s food. Score: %s, Size Points: %s" % [Global.FishSize.keys()[food_item.fish_food_size_category], Global.get_score(), current_size_points])
+		print("Fishda ate %s food. Score: %s, Size Points: %s" % [Global.FishSize.keys()[food_item.fish_food_size_category], Global.get_score(), Global.current_size_points])
 		food_item.queue_free() # Remove the food item
 		
 		# Play eating sound effect

@@ -6,6 +6,13 @@ var path_to_next_scene
 var current_score: int = 0
 signal score_updated(new_score)
 
+#current size points to eat
+signal current_size_updated
+var current_size_points := 0 setget set_current_size_points
+func set_current_size_points(value):
+	current_size_points = value
+	emit_signal("current_size_updated")
+
 # Player Size Tiers for Eating
 # Example: player needs a "size points" of 20 to eat medium and 50 for large, can be changed for balancing
 export var CAN_EAT_MEDIUM_THRESHOLD = 20 

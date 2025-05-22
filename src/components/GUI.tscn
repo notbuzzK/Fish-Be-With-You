@@ -1,46 +1,136 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scripts/GUI.gd" type="Script" id=1]
-[ext_resource path="res://assets/star/star2.png" type="Texture" id=3]
+[ext_resource path="res://assets/buttons/settings-btn.png" type="Texture" id=2]
+[ext_resource path="res://assets/in_game/heart_in.png" type="Texture" id=3]
 [ext_resource path="res://assets/Screenshot 2025-05-16 225126.png" type="Texture" id=4]
+[ext_resource path="res://assets/in_game/heart_out.png" type="Texture" id=5]
+[ext_resource path="res://assets/in_game/timer_out.png" type="Texture" id=6]
+[ext_resource path="res://assets/in_game/star_out.png" type="Texture" id=7]
+[ext_resource path="res://assets/buttons/settings_btn-state2.png" type="Texture" id=8]
+[ext_resource path="res://assets/in_game/star_in.png" type="Texture" id=9]
+[ext_resource path="res://assets/in_game/timer_in.png" type="Texture" id=10]
+[ext_resource path="res://assets/in_game/prog.png" type="Texture" id=11]
+[ext_resource path="res://assets/in_game/progress.png" type="Texture" id=12]
+[ext_resource path="res://assets/in_game/progress_out.png" type="Texture" id=13]
+[ext_resource path="res://assets/in_game/smol.png" type="Texture" id=14]
+[ext_resource path="res://assets/in_game/large.png" type="Texture" id=15]
+[ext_resource path="res://assets/in_game/medium 1.png" type="Texture" id=16]
+[ext_resource path="res://assets/in_game/medium.png" type="Texture" id=17]
+[ext_resource path="res://assets/in_game/large 1.png" type="Texture" id=18]
+[ext_resource path="res://assets/font/SuperDream-ax3vE.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://assets/font/SuperMario256.ttf" type="DynamicFontData" id=20]
+
+[sub_resource type="DynamicFont" id=7]
+size = 35
+font_data = ExtResource( 20 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 20
+font_data = ExtResource( 19 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 300, 241 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 300, 241 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 266, 266 )
+
+[sub_resource type="ButtonGroup" id=5]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 5.0
+margin_bottom = 2.0
+rect_pivot_offset = Vector2( 265, 324 )
 script = ExtResource( 1 )
 score_to_complete_level = 150
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -515.0
+margin_top = 28.0
+margin_right = -342.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 7 )
+
+[node name="TimeLeft" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -24.0
+margin_top = 45.0
+margin_right = 68.0
+margin_bottom = 121.0
+rect_pivot_offset = Vector2( -236, 284 )
+custom_fonts/font = SubResource( 6 )
 
 [node name="LevelTimer" type="Timer" parent="."]
 wait_time = 105.0
 one_shot = true
 autostart = true
 
-[node name="TimeLeft" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -80.0
-margin_top = 95.0
-margin_right = 80.0
-margin_bottom = 151.0
+[node name="TimerIn" type="Sprite" parent="LevelTimer"]
+position = Vector2( 640.5, 59.5 )
+scale = Vector2( 0.0864584, 0.0793522 )
+texture = ExtResource( 10 )
 
-[node name="ScoreLabel" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -375.0
-margin_top = 54.0
-margin_right = -261.0
-margin_bottom = 94.0
+[node name="TimerOut" type="Sprite" parent="LevelTimer"]
+position = Vector2( 641, 58.25 )
+scale = Vector2( 0.0958333, 0.0807292 )
+texture = ExtResource( 6 )
 
 [node name="ProgressBar" type="TextureProgress" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -207.0
-margin_right = 208.0
-margin_bottom = 30.0
-texture_under = ExtResource( 4 )
-texture_progress = ExtResource( 4 )
-tint_under = Color( 0.65098, 0.243137, 0.243137, 1 )
-tint_progress = Color( 0.156863, 0.643137, 0.2, 1 )
+margin_left = -642.0
+margin_top = 7.0
+margin_right = 2958.0
+margin_bottom = 843.0
+rect_scale = Vector2( 0.08, 0.08 )
+rounded = true
+texture_under = ExtResource( 12 )
+texture_over = ExtResource( 13 )
+texture_progress = ExtResource( 11 )
+texture_progress_offset = Vector2( 125, 100 )
+
+[node name="Smol" type="Sprite" parent="ProgressBar"]
+position = Vector2( 860, 1090 )
+scale = Vector2( 0.330078, 0.236816 )
+texture = ExtResource( 14 )
+
+[node name="Medium_blk" type="Sprite" parent="ProgressBar"]
+position = Vector2( 1880, 1130 )
+scale = Vector2( 1.583, 1.20684 )
+texture = ExtResource( 16 )
+
+[node name="Medium_clr" type="Sprite" parent="ProgressBar"]
+visible = false
+position = Vector2( 1890, 1130 )
+scale = Vector2( 0.350586, 0.289062 )
+texture = ExtResource( 17 )
+
+[node name="Large_blk" type="Sprite" parent="ProgressBar"]
+position = Vector2( 3010, 1110 )
+scale = Vector2( 1.87012, 1.3457 )
+texture = ExtResource( 18 )
+
+[node name="Large_clr" type="Sprite" parent="ProgressBar"]
+visible = false
+position = Vector2( 2990, 1100 )
+scale = Vector2( 0.410156, 0.34375 )
+texture = ExtResource( 15 )
 
 [node name="HSlider" type="HSlider" parent="."]
 visible = false
@@ -62,43 +152,74 @@ tint_progress = Color( 0.85098, 0.0784314, 0.0784314, 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Heart1" type="Sprite" parent="Hearts"]
-position = Vector2( 70, 22 )
-scale = Vector2( 0.048, 0.048 )
+[node name="heart3" type="Sprite" parent="Hearts"]
+position = Vector2( 683.921, 114.065 )
+scale = Vector2( 0.0662238, 0.0642649 )
 texture = ExtResource( 3 )
 
-[node name="Star5" type="Sprite" parent="Hearts"]
-position = Vector2( 185, 22 )
-scale = Vector2( 0.048, 0.048 )
+[node name="heart2" type="Sprite" parent="Hearts"]
+position = Vector2( 641.882, 114.945 )
+scale = Vector2( 0.0663163, 0.0594211 )
 texture = ExtResource( 3 )
 
-[node name="Star6" type="Sprite" parent="Hearts"]
-position = Vector2( 310, 22 )
-scale = Vector2( 0.048, 0.048 )
+[node name="heart1" type="Sprite" parent="Hearts"]
+position = Vector2( 598.898, 115.661 )
+scale = Vector2( 0.0686367, 0.0627297 )
 texture = ExtResource( 3 )
+
+[node name="HeartOut" type="Sprite" parent="Hearts"]
+position = Vector2( 596.25, 113 )
+scale = Vector2( 0.0742481, 0.0695652 )
+texture = ExtResource( 5 )
+
+[node name="HeartOut2" type="Sprite" parent="Hearts"]
+position = Vector2( 640, 112.5 )
+scale = Vector2( 0.0714284, 0.0673913 )
+texture = ExtResource( 5 )
+
+[node name="HeartOut3" type="Sprite" parent="Hearts"]
+position = Vector2( 681.5, 111.25 )
+scale = Vector2( 0.069549, 0.0684783 )
+texture = ExtResource( 5 )
 
 [node name="Stars" type="Control" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -20.0
-margin_right = 20.0
-margin_bottom = 40.0
+margin_left = -16.0
+margin_top = -1.0
+margin_right = 24.0
+margin_bottom = 39.0
 rect_pivot_offset = Vector2( -33, -245 )
 
+[node name="StarOut3" type="Sprite" parent="Stars"]
+position = Vector2( 437.5, 53.5 )
+scale = Vector2( 0.152738, 0.149123 )
+texture = ExtResource( 7 )
+
+[node name="StarOut2" type="Sprite" parent="Stars"]
+position = Vector2( 379, 53 )
+scale = Vector2( 0.167147, 0.143275 )
+texture = ExtResource( 7 )
+
+[node name="StarOut" type="Sprite" parent="Stars"]
+position = Vector2( 317.5, 52.5 )
+scale = Vector2( 0.158502, 0.143275 )
+texture = ExtResource( 7 )
+
 [node name="Star1" type="Sprite" parent="Stars"]
-position = Vector2( -91, 64 )
-scale = Vector2( 0.048, 0.048 )
-texture = ExtResource( 3 )
+position = Vector2( 317.349, 76.1055 )
+scale = Vector2( 0.148776, 0.135163 )
+texture = ExtResource( 9 )
 
 [node name="Star2" type="Sprite" parent="Stars"]
-position = Vector2( 24, 64 )
-scale = Vector2( 0.048, 0.048 )
-texture = ExtResource( 3 )
+position = Vector2( 379, 77 )
+scale = Vector2( 0.154863, 0.13566 )
+texture = ExtResource( 9 )
 
 [node name="Star3" type="Sprite" parent="Stars"]
-position = Vector2( 149, 64 )
-scale = Vector2( 0.048, 0.048 )
-texture = ExtResource( 3 )
+position = Vector2( 438, 78 )
+scale = Vector2( 0.147097, 0.140599 )
+texture = ExtResource( 9 )
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -139,17 +260,17 @@ text = "Level Complete"
 [node name="Star1" type="Sprite" parent="LevelComplete/PanelContainer/VBoxContainer/PanelContainer"]
 position = Vector2( 32, 25 )
 scale = Vector2( 0.048, 0.048 )
-texture = ExtResource( 3 )
+texture = ExtResource( 9 )
 
 [node name="Star2" type="Sprite" parent="LevelComplete/PanelContainer/VBoxContainer/PanelContainer"]
 position = Vector2( 147, 25 )
 scale = Vector2( 0.048, 0.048 )
-texture = ExtResource( 3 )
+texture = ExtResource( 9 )
 
 [node name="Star3" type="Sprite" parent="LevelComplete/PanelContainer/VBoxContainer/PanelContainer"]
 position = Vector2( 272, 25 )
 scale = Vector2( 0.048, 0.048 )
-texture = ExtResource( 3 )
+texture = ExtResource( 9 )
 
 [node name="Restart" type="Button" parent="LevelComplete/PanelContainer/VBoxContainer"]
 pause_mode = 2
@@ -227,9 +348,22 @@ margin_right = 286.0
 margin_bottom = 76.0
 text = "MainMenu"
 
+[node name="Settings" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1203.0
+margin_top = 15.0
+margin_right = -14.0
+margin_bottom = -653.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+group = SubResource( 5 )
+
 [connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]
 [connection signal="pressed" from="GameOver/PanelContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="GameOver/PanelContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="GameOver/PanelContainer/VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_Settings_pressed"]

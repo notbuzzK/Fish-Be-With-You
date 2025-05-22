@@ -19,3 +19,14 @@ func _on_Settings_pressed():
 	get_tree().change_scene("res://src/scenes/Settings.tscn")
 
 
+func _on_PearlButton1_pressed():
+	get_tree().change_scene("res://src/levels/Level1.tscn")
+	print("New Game pressed: going to level 1")
+
+
+func _on_PearlButton2_pressed():
+	get_tree().change_scene(nextScene)
+
+
+func _on_PearlButton3_pressed():
+	get_tree().change_scene("res://src/scenes/ChangeAppearance.tscn")
