@@ -1,0 +1,722 @@
+[gd_scene load_steps=52 format=2]
+
+[ext_resource path="res://assets/pong_pagong/1_45 time no glow or highlight.png" type="Texture" id=1]
+[ext_resource path="res://assets/buttons/settings-btn.png" type="Texture" id=2]
+[ext_resource path="res://assets/pong_pagong/hearts highlighted.png" type="Texture" id=3]
+[ext_resource path="res://assets/pong_pagong/LEVEL 6-bg.png" type="Texture" id=4]
+[ext_resource path="res://assets/pong_pagong/pagong 2-4.png" type="Texture" id=5]
+[ext_resource path="res://assets/pong_pagong/next button.png" type="Texture" id=6]
+[ext_resource path="res://assets/pong_pagong/stars highlighted.png" type="Texture" id=7]
+[ext_resource path="res://assets/pong_pagong/pagong 1, 5.png" type="Texture" id=8]
+[ext_resource path="res://assets/pong_pagong/text 2.png" type="Texture" id=9]
+[ext_resource path="res://assets/pong_pagong/LEVEL 6 - FG.png" type="Texture" id=10]
+[ext_resource path="res://assets/pong_pagong/progress highlighted.png" type="Texture" id=11]
+[ext_resource path="res://assets/pong_pagong/time.png" type="Texture" id=12]
+[ext_resource path="res://assets/pong_pagong/lvlb&w.png" type="Texture" id=13]
+[ext_resource path="res://assets/pong_pagong/starsb&w.png" type="Texture" id=14]
+[ext_resource path="res://assets/pong_pagong/progress bar.png" type="Texture" id=15]
+[ext_resource path="res://assets/pong_pagong/settings.png" type="Texture" id=16]
+[ext_resource path="res://assets/pong_pagong/progress normal.png" type="Texture" id=17]
+[ext_resource path="res://assets/font/SuperFunky-lgmWw.ttf" type="DynamicFontData" id=18]
+[ext_resource path="res://assets/pong_pagong/text 1.png" type="Texture" id=19]
+[ext_resource path="res://assets/font/SuperMario256.ttf" type="DynamicFontData" id=20]
+[ext_resource path="res://src/components/how2play.gd" type="Script" id=21]
+[ext_resource path="res://assets/pong_pagong/2 fish highlighted.png" type="Texture" id=22]
+[ext_resource path="res://assets/pong_pagong/text 7,1.png" type="Texture" id=23]
+[ext_resource path="res://assets/pong_pagong/text 7,4.png" type="Texture" id=24]
+[ext_resource path="res://assets/pong_pagong/text 7,2.png" type="Texture" id=25]
+[ext_resource path="res://assets/pong_pagong/text 7,3.png" type="Texture" id=26]
+[ext_resource path="res://assets/pong_pagong/stars normal.png" type="Texture" id=27]
+[ext_resource path="res://assets/pong_pagong/hearts normal.png" type="Texture" id=28]
+[ext_resource path="res://assets/pong_pagong/1_45 time with highlight.png" type="Texture" id=29]
+[ext_resource path="res://assets/pong_pagong/text 3,1.png" type="Texture" id=30]
+[ext_resource path="res://assets/pong_pagong/pagong 3,4.png" type="Texture" id=31]
+[ext_resource path="res://assets/pong_pagong/text 3,3.png" type="Texture" id=32]
+[ext_resource path="res://assets/pong_pagong/text 3,2.png" type="Texture" id=33]
+[ext_resource path="res://assets/pong_pagong/text 3,4.png" type="Texture" id=34]
+[ext_resource path="res://assets/pong_pagong/text 4,1.png" type="Texture" id=35]
+[ext_resource path="res://assets/pong_pagong/text 4,2.png" type="Texture" id=36]
+[ext_resource path="res://assets/pong_pagong/text 4,3.png" type="Texture" id=37]
+[ext_resource path="res://assets/pong_pagong/0 time highlighted.png" type="Texture" id=38]
+[ext_resource path="res://assets/pong_pagong/text 5.png" type="Texture" id=39]
+[ext_resource path="res://assets/pong_pagong/pagong 7.png" type="Texture" id=40]
+[ext_resource path="res://assets/pong_pagong/2 herts only.png" type="Texture" id=41]
+[ext_resource path="res://assets/pong_pagong/hearts.png" type="Texture" id=42]
+[ext_resource path="res://assets/pong_pagong/2 stars only.png" type="Texture" id=43]
+[ext_resource path="res://assets/pong_pagong/3 fish highlight.png" type="Texture" id=44]
+[ext_resource path="res://assets/pong_pagong/text 6.png" type="Texture" id=45]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 1350, 1350 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 1350, 1350 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 1350, 1350 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 33
+font_data = ExtResource( 20 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 18 )
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 18 )
+
+[node name="tutorial" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 5.0
+margin_bottom = 2.0
+rect_pivot_offset = Vector2( 265, 324 )
+script = ExtResource( 21 )
+
+[node name="bg" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Level6-bg" type="Sprite" parent="bg"]
+position = Vector2( 640, 359 )
+scale = Vector2( 0.314216, 0.312854 )
+texture = ExtResource( 4 )
+
+[node name="fg" type="CanvasLayer" parent="."]
+
+[node name="Level6-Fg" type="Sprite" parent="fg"]
+position = Vector2( 639, 358 )
+scale = Vector2( 0.314216, 0.312854 )
+texture = ExtResource( 10 )
+
+[node name="next" type="Button" parent="fg"]
+margin_left = 977.0
+margin_top = 304.0
+margin_right = 1089.0
+margin_bottom = 408.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
+
+[node name="scene1" type="Node2D" parent="."]
+
+[node name="pong_scn1" type="Sprite" parent="scene1"]
+position = Vector2( 443.5, 461.038 )
+scale = Vector2( 0.0827875, 0.0824233 )
+texture = ExtResource( 8 )
+
+[node name="Text1" type="Sprite" parent="scene1"]
+position = Vector2( 812, 355 )
+scale = Vector2( 0.230275, 0.24539 )
+texture = ExtResource( 19 )
+
+[node name="ProgressNormal" type="Sprite" parent="scene1"]
+position = Vector2( 183, 86 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 17 )
+
+[node name="time" type="Sprite" parent="scene1"]
+position = Vector2( 642, 65 )
+scale = Vector2( 0.0906251, 0.0838542 )
+texture = ExtResource( 1 )
+
+[node name="hearts" type="Sprite" parent="scene1"]
+position = Vector2( 648, 131 )
+scale = Vector2( 0.0842867, 0.076192 )
+texture = ExtResource( 28 )
+
+[node name="StarsNormal" type="Sprite" parent="scene1"]
+position = Vector2( 1068, 81 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 27 )
+
+[node name="Settings-btn" type="Sprite" parent="scene1"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.247334, 0.235374 )
+texture = ExtResource( 2 )
+
+[node name="level1" type="RichTextLabel" parent="scene1"]
+margin_left = 811.0
+margin_top = 51.0
+margin_right = 1017.0
+margin_bottom = 117.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Level 1:"
+
+[node name="scene2" type="Node2D" parent="."]
+visible = false
+
+[node name="pong_scn2" type="Sprite" parent="scene2"]
+position = Vector2( 884, 380 )
+scale = Vector2( 0.0827875, 0.0824233 )
+texture = ExtResource( 5 )
+
+[node name="Text2" type="Sprite" parent="scene2"]
+position = Vector2( 384, 349 )
+scale = Vector2( 0.227832, 0.253314 )
+texture = ExtResource( 9 )
+
+[node name="heartshighlight" type="Sprite" parent="scene2"]
+position = Vector2( 645, 126.294 )
+scale = Vector2( 0.0842867, 0.076192 )
+texture = ExtResource( 3 )
+
+[node name="ProgressBarb&w" type="Sprite" parent="scene2"]
+position = Vector2( 182.5, 86.08 )
+scale = Vector2( 0.0623404, 0.0624107 )
+texture = ExtResource( 15 )
+
+[node name="timeb&w" type="Sprite" parent="scene2"]
+position = Vector2( 642.5, 64.5 )
+scale = Vector2( 0.0279563, 0.0260283 )
+texture = ExtResource( 12 )
+
+[node name="Starsb&w" type="Sprite" parent="scene2"]
+position = Vector2( 1068, 64 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 14 )
+
+[node name="Settingsb&w" type="Sprite" parent="scene2"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.0817383, 0.0738238 )
+texture = ExtResource( 16 )
+
+[node name="Lvlb&w" type="Sprite" parent="scene2"]
+position = Vector2( 897.25, 69.25 )
+scale = Vector2( 0.0822288, 0.085206 )
+texture = ExtResource( 13 )
+
+[node name="scene3" type="Node2D" parent="."]
+visible = false
+
+[node name="pong_scn3" type="Sprite" parent="scene3"]
+position = Vector2( 287, 395 )
+scale = Vector2( 0.0827875, 0.0824233 )
+texture = ExtResource( 5 )
+
+[node name="Text3one" type="Sprite" parent="scene3"]
+position = Vector2( 696, 342 )
+scale = Vector2( 0.225632, 0.248715 )
+texture = ExtResource( 30 )
+
+[node name="timeb&w" type="Sprite" parent="scene3"]
+position = Vector2( 642.5, 64.5 )
+scale = Vector2( 0.0279563, 0.0260283 )
+texture = ExtResource( 12 )
+
+[node name="Starsb&w" type="Sprite" parent="scene3"]
+position = Vector2( 1068, 64 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 14 )
+
+[node name="Settingsb&w" type="Sprite" parent="scene3"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.0817383, 0.0738238 )
+texture = ExtResource( 16 )
+
+[node name="Lvlb&w" type="Sprite" parent="scene3"]
+position = Vector2( 897.25, 69.25 )
+scale = Vector2( 0.0822288, 0.085206 )
+texture = ExtResource( 13 )
+
+[node name="heartsb&w" type="Sprite" parent="scene3"]
+position = Vector2( 647, 129 )
+scale = Vector2( 0.0322442, 0.0278884 )
+texture = ExtResource( 42 )
+
+[node name="ProgressHighlighted" type="Sprite" parent="scene3"]
+position = Vector2( 183, 86 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 11 )
+
+[node name="scene4" type="Node2D" parent="."]
+visible = false
+
+[node name="Text3two" type="Sprite" parent="scene4"]
+position = Vector2( 694.5, 341.609 )
+scale = Vector2( 0.228435, 0.252112 )
+texture = ExtResource( 33 )
+
+[node name="pong_scn4" type="Sprite" parent="scene4"]
+position = Vector2( 287, 395 )
+scale = Vector2( 0.0827875, 0.0824233 )
+texture = ExtResource( 5 )
+
+[node name="timeb&w" type="Sprite" parent="scene4"]
+position = Vector2( 642.5, 64.5 )
+scale = Vector2( 0.0279563, 0.0260283 )
+texture = ExtResource( 12 )
+
+[node name="Starsb&w" type="Sprite" parent="scene4"]
+position = Vector2( 1068, 64 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 14 )
+
+[node name="Settingsb&w" type="Sprite" parent="scene4"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.0817383, 0.0738238 )
+texture = ExtResource( 16 )
+
+[node name="Lvlb&w" type="Sprite" parent="scene4"]
+position = Vector2( 897.25, 69.25 )
+scale = Vector2( 0.0822288, 0.085206 )
+texture = ExtResource( 13 )
+
+[node name="Hearts" type="Sprite" parent="scene4"]
+position = Vector2( 647, 129 )
+scale = Vector2( 0.0322442, 0.0278884 )
+texture = ExtResource( 42 )
+
+[node name="2FishHighlighted" type="Sprite" parent="scene4"]
+position = Vector2( 183, 88 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 22 )
+
+[node name="scene5" type="Node2D" parent="."]
+visible = false
+
+[node name="Text3three" type="Sprite" parent="scene5"]
+position = Vector2( 693.631, 340.609 )
+scale = Vector2( 0.227229, 0.252112 )
+texture = ExtResource( 32 )
+
+[node name="pong_scn5" type="Sprite" parent="scene5"]
+position = Vector2( 287, 395 )
+scale = Vector2( 0.0827875, 0.0824233 )
+texture = ExtResource( 5 )
+
+[node name="timeb&w" type="Sprite" parent="scene5"]
+position = Vector2( 642.5, 64.5 )
+scale = Vector2( 0.0279563, 0.0260283 )
+texture = ExtResource( 12 )
+
+[node name="Starsb&w" type="Sprite" parent="scene5"]
+position = Vector2( 1068, 64 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 14 )
+
+[node name="Settingsb&w" type="Sprite" parent="scene5"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.0817383, 0.0738238 )
+texture = ExtResource( 16 )
+
+[node name="Lvlb&w" type="Sprite" parent="scene5"]
+position = Vector2( 897.25, 69.25 )
+scale = Vector2( 0.0822288, 0.085206 )
+texture = ExtResource( 13 )
+
+[node name="Hearts" type="Sprite" parent="scene5"]
+position = Vector2( 647, 129 )
+scale = Vector2( 0.0322442, 0.0278884 )
+texture = ExtResource( 42 )
+
+[node name="3FishHighlight" type="Sprite" parent="scene5"]
+position = Vector2( 183, 89 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 44 )
+
+[node name="scene6" type="Node2D" parent="."]
+visible = false
+
+[node name="Text3three" type="Sprite" parent="scene6"]
+position = Vector2( 746, 297 )
+scale = Vector2( 0.227229, 0.252112 )
+texture = ExtResource( 34 )
+
+[node name="pong_scn5" type="Sprite" parent="scene6"]
+position = Vector2( 300, 395 )
+scale = Vector2( 0.0840487, 0.0849926 )
+texture = ExtResource( 31 )
+
+[node name="timeb&w" type="Sprite" parent="scene6"]
+position = Vector2( 642.5, 64.5 )
+scale = Vector2( 0.0279563, 0.0260283 )
+texture = ExtResource( 12 )
+
+[node name="Starsb&w" type="Sprite" parent="scene6"]
+position = Vector2( 1068, 64 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 14 )
+
+[node name="Settingsb&w" type="Sprite" parent="scene6"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.0817383, 0.0738238 )
+texture = ExtResource( 16 )
+
+[node name="Lvlb&w" type="Sprite" parent="scene6"]
+position = Vector2( 897.25, 69.25 )
+scale = Vector2( 0.0822288, 0.085206 )
+texture = ExtResource( 13 )
+
+[node name="3FishHighlight" type="Sprite" parent="scene6"]
+position = Vector2( 183, 89 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 44 )
+
+[node name="2HertsOnly" type="Sprite" parent="scene6"]
+position = Vector2( 644.5, 125.5 )
+scale = Vector2( 0.0827964, 0.0685976 )
+texture = ExtResource( 41 )
+
+[node name="-1" type="RichTextLabel" parent="scene6"]
+margin_left = 717.0
+margin_top = 109.0
+margin_right = 899.0
+margin_bottom = 155.0
+custom_fonts/normal_font = SubResource( 5 )
+text = "-1"
+
+[node name="scene7" type="Node2D" parent="."]
+visible = false
+
+[node name="Text3three" type="Sprite" parent="scene7"]
+position = Vector2( 432, 379 )
+scale = Vector2( 0.227229, 0.252112 )
+texture = ExtResource( 35 )
+
+[node name="pong_scn5" type="Sprite" parent="scene7"]
+position = Vector2( 917, 408 )
+scale = Vector2( 0.0840487, 0.0849926 )
+texture = ExtResource( 5 )
+
+[node name="time_highlight" type="Sprite" parent="scene7"]
+position = Vector2( 642, 66.268 )
+scale = Vector2( 0.0875912, 0.0811825 )
+texture = ExtResource( 29 )
+
+[node name="stars_highlight" type="Sprite" parent="scene7"]
+position = Vector2( 1068, 71 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 7 )
+
+[node name="Settingsb&w" type="Sprite" parent="scene7"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.0817383, 0.0738238 )
+texture = ExtResource( 16 )
+
+[node name="Lvlb&w" type="Sprite" parent="scene7"]
+position = Vector2( 897.25, 69.25 )
+scale = Vector2( 0.0822288, 0.085206 )
+texture = ExtResource( 13 )
+
+[node name="heartsb&w" type="Sprite" parent="scene7"]
+position = Vector2( 647, 129 )
+scale = Vector2( 0.0322442, 0.0278884 )
+texture = ExtResource( 42 )
+
+[node name="ProgressBarb&w" type="Sprite" parent="scene7"]
+position = Vector2( 182.5, 86.08 )
+scale = Vector2( 0.0623404, 0.0624107 )
+texture = ExtResource( 15 )
+
+[node name="scene8" type="Node2D" parent="."]
+visible = false
+
+[node name="Text3three" type="Sprite" parent="scene8"]
+position = Vector2( 434, 379 )
+scale = Vector2( 0.224371, 0.252112 )
+texture = ExtResource( 36 )
+
+[node name="pong_scn5" type="Sprite" parent="scene8"]
+position = Vector2( 918, 409 )
+scale = Vector2( 0.0840487, 0.0849926 )
+texture = ExtResource( 5 )
+
+[node name="time_highlight" type="Sprite" parent="scene8"]
+position = Vector2( 642, 66.268 )
+scale = Vector2( 0.0875912, 0.0811825 )
+texture = ExtResource( 29 )
+
+[node name="stars_highlight" type="Sprite" parent="scene8"]
+position = Vector2( 1068, 71 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 7 )
+
+[node name="Settingsb&w" type="Sprite" parent="scene8"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.0817383, 0.0738238 )
+texture = ExtResource( 16 )
+
+[node name="Lvlb&w" type="Sprite" parent="scene8"]
+position = Vector2( 897.25, 69.25 )
+scale = Vector2( 0.0822288, 0.085206 )
+texture = ExtResource( 13 )
+
+[node name="heartsb&w" type="Sprite" parent="scene8"]
+position = Vector2( 647, 129 )
+scale = Vector2( 0.0322442, 0.0278884 )
+texture = ExtResource( 42 )
+
+[node name="ProgressBarb&w" type="Sprite" parent="scene8"]
+position = Vector2( 182.5, 86.08 )
+scale = Vector2( 0.0623404, 0.0624107 )
+texture = ExtResource( 15 )
+
+[node name="scene9" type="Node2D" parent="."]
+visible = false
+
+[node name="Text3three" type="Sprite" parent="scene9"]
+position = Vector2( 429, 378.118 )
+scale = Vector2( 0.221512, 0.245912 )
+texture = ExtResource( 37 )
+
+[node name="pong_scn5" type="Sprite" parent="scene9"]
+position = Vector2( 918, 409 )
+scale = Vector2( 0.0840487, 0.0849926 )
+texture = ExtResource( 5 )
+
+[node name="0TimeHighlighted" type="Sprite" parent="scene9"]
+position = Vector2( 641.797, 65.1998 )
+scale = Vector2( 0.0678195, 0.0626848 )
+texture = ExtResource( 38 )
+
+[node name="2StarsOnly" type="Sprite" parent="scene9"]
+position = Vector2( 1067, 69 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 43 )
+
+[node name="Settingsb&w" type="Sprite" parent="scene9"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.0817383, 0.0738238 )
+texture = ExtResource( 16 )
+
+[node name="Lvlb&w" type="Sprite" parent="scene9"]
+position = Vector2( 897.25, 69.25 )
+scale = Vector2( 0.0822288, 0.085206 )
+texture = ExtResource( 13 )
+
+[node name="heartsb&w" type="Sprite" parent="scene9"]
+position = Vector2( 647, 129 )
+scale = Vector2( 0.0322442, 0.0278884 )
+texture = ExtResource( 42 )
+
+[node name="ProgressBarb&w" type="Sprite" parent="scene9"]
+position = Vector2( 182.5, 86.08 )
+scale = Vector2( 0.0623404, 0.0624107 )
+texture = ExtResource( 15 )
+
+[node name="-1" type="RichTextLabel" parent="scene9"]
+margin_left = 1147.0
+margin_top = 49.0
+margin_right = 1329.0
+margin_bottom = 95.0
+custom_fonts/normal_font = SubResource( 6 )
+text = "-1"
+
+[node name="scene10" type="Node2D" parent="."]
+visible = false
+
+[node name="Text5" type="Sprite" parent="scene10"]
+position = Vector2( 643, 308 )
+scale = Vector2( 0.15661, 0.206206 )
+texture = ExtResource( 39 )
+
+[node name="pong_scn1" type="Sprite" parent="scene10"]
+position = Vector2( 1114, 524 )
+scale = Vector2( 0.0618592, 0.0614821 )
+z_index = 1
+texture = ExtResource( 8 )
+
+[node name="scene11" type="Node2D" parent="."]
+visible = false
+
+[node name="Text6" type="Sprite" parent="scene11"]
+position = Vector2( 670.5, 308.5 )
+scale = Vector2( 0.155302, 0.204599 )
+texture = ExtResource( 45 )
+
+[node name="pong_scn1" type="Sprite" parent="scene11"]
+position = Vector2( 1114, 524 )
+scale = Vector2( 0.0618592, 0.0614821 )
+z_index = 1
+texture = ExtResource( 8 )
+
+[node name="scene12" type="Node2D" parent="."]
+visible = false
+
+[node name="ProgressNormal" type="Sprite" parent="scene12"]
+position = Vector2( 183, 86 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 17 )
+
+[node name="time" type="Sprite" parent="scene12"]
+position = Vector2( 642, 65 )
+scale = Vector2( 0.0906251, 0.0838542 )
+texture = ExtResource( 1 )
+
+[node name="hearts" type="Sprite" parent="scene12"]
+position = Vector2( 648, 131 )
+scale = Vector2( 0.0842867, 0.076192 )
+texture = ExtResource( 28 )
+
+[node name="StarsNormal" type="Sprite" parent="scene12"]
+position = Vector2( 1068, 81 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 27 )
+
+[node name="Settings-btn" type="Sprite" parent="scene12"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.247334, 0.235374 )
+texture = ExtResource( 2 )
+
+[node name="level1" type="RichTextLabel" parent="scene12"]
+margin_left = 811.0
+margin_top = 51.0
+margin_right = 1017.0
+margin_bottom = 117.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Level 1:"
+
+[node name="Pagong7" type="Sprite" parent="scene12"]
+position = Vector2( 456, 443 )
+scale = Vector2( 0.0827875, 0.0824233 )
+texture = ExtResource( 40 )
+
+[node name="Text7one" type="Sprite" parent="scene12"]
+position = Vector2( 894, 405 )
+scale = Vector2( 0.231751, 0.248133 )
+texture = ExtResource( 23 )
+
+[node name="scene13" type="Node2D" parent="."]
+visible = false
+
+[node name="ProgressNormal" type="Sprite" parent="scene13"]
+position = Vector2( 183, 86 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 17 )
+
+[node name="time" type="Sprite" parent="scene13"]
+position = Vector2( 642, 65 )
+scale = Vector2( 0.0906251, 0.0838542 )
+texture = ExtResource( 1 )
+
+[node name="hearts" type="Sprite" parent="scene13"]
+position = Vector2( 648, 131 )
+scale = Vector2( 0.0842867, 0.076192 )
+texture = ExtResource( 28 )
+
+[node name="StarsNormal" type="Sprite" parent="scene13"]
+position = Vector2( 1068, 81 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 27 )
+
+[node name="Settings-btn" type="Sprite" parent="scene13"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.247334, 0.235374 )
+texture = ExtResource( 2 )
+
+[node name="level1" type="RichTextLabel" parent="scene13"]
+margin_left = 811.0
+margin_top = 51.0
+margin_right = 1017.0
+margin_bottom = 117.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Level 1:"
+
+[node name="Pagong7" type="Sprite" parent="scene13"]
+position = Vector2( 456, 443 )
+scale = Vector2( 0.0827875, 0.0824233 )
+texture = ExtResource( 40 )
+
+[node name="Text7two" type="Sprite" parent="scene13"]
+position = Vector2( 895, 404 )
+scale = Vector2( 0.231751, 0.248133 )
+texture = ExtResource( 25 )
+
+[node name="scene14" type="Node2D" parent="."]
+visible = false
+
+[node name="ProgressNormal" type="Sprite" parent="scene14"]
+position = Vector2( 183, 86 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 17 )
+
+[node name="time" type="Sprite" parent="scene14"]
+position = Vector2( 642, 65 )
+scale = Vector2( 0.0906251, 0.0838542 )
+texture = ExtResource( 1 )
+
+[node name="hearts" type="Sprite" parent="scene14"]
+position = Vector2( 648, 131 )
+scale = Vector2( 0.0842867, 0.076192 )
+texture = ExtResource( 28 )
+
+[node name="StarsNormal" type="Sprite" parent="scene14"]
+position = Vector2( 1068, 81 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 27 )
+
+[node name="Settings-btn" type="Sprite" parent="scene14"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.247334, 0.235374 )
+texture = ExtResource( 2 )
+
+[node name="level1" type="RichTextLabel" parent="scene14"]
+margin_left = 811.0
+margin_top = 51.0
+margin_right = 1017.0
+margin_bottom = 117.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Level 1:"
+
+[node name="Pagong7" type="Sprite" parent="scene14"]
+position = Vector2( 456, 443 )
+scale = Vector2( 0.0827875, 0.0824233 )
+texture = ExtResource( 40 )
+
+[node name="Text7three" type="Sprite" parent="scene14"]
+position = Vector2( 900, 405 )
+scale = Vector2( 0.231751, 0.248133 )
+texture = ExtResource( 26 )
+
+[node name="scene15" type="Node2D" parent="."]
+visible = false
+
+[node name="ProgressNormal" type="Sprite" parent="scene15"]
+position = Vector2( 183, 86 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 17 )
+
+[node name="time" type="Sprite" parent="scene15"]
+position = Vector2( 642, 65 )
+scale = Vector2( 0.0906251, 0.0838542 )
+texture = ExtResource( 1 )
+
+[node name="hearts" type="Sprite" parent="scene15"]
+position = Vector2( 648, 131 )
+scale = Vector2( 0.0842867, 0.076192 )
+texture = ExtResource( 28 )
+
+[node name="StarsNormal" type="Sprite" parent="scene15"]
+position = Vector2( 1068, 81 )
+scale = Vector2( 0.134905, 0.103666 )
+texture = ExtResource( 27 )
+
+[node name="Settings-btn" type="Sprite" parent="scene15"]
+position = Vector2( 1229.05, 65.8919 )
+scale = Vector2( 0.247334, 0.235374 )
+texture = ExtResource( 2 )
+
+[node name="level1" type="RichTextLabel" parent="scene15"]
+margin_left = 811.0
+margin_top = 51.0
+margin_right = 1017.0
+margin_bottom = 117.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "Level 1:"
+
+[node name="Pagong7" type="Sprite" parent="scene15"]
+position = Vector2( 456, 443 )
+scale = Vector2( 0.0827875, 0.0824233 )
+texture = ExtResource( 40 )
+
+[node name="Text7four" type="Sprite" parent="scene15"]
+position = Vector2( 898, 405 )
+scale = Vector2( 0.231751, 0.248133 )
+texture = ExtResource( 24 )
+
+[connection signal="pressed" from="fg/next" to="." method="_on_next_pressed"]

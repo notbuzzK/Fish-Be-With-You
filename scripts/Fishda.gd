@@ -29,7 +29,8 @@ export var acceleration: float = 9.8 # not used, debating to use it or not
 var current_speed_multiplier: float = 1.0
 var velocity: Vector2 = Vector2()
 
-onready var sprite = $Sprite
+onready var sprite = $Sprite #fishda close mouth
+onready var sprite2 =$Sprite2 #fishda nganga
 onready var collision_shape = $CollisionShape2D
 onready var speed_buff_timer = $Timer
 onready var damage_cooldown_timer = $DamageCooldownTimer
@@ -39,7 +40,13 @@ export var BOSS_BITE_COOLDOWN_TIME: float = 1.0
 var can_bite_boss: bool = true
 onready var boss_bite_cooldown_timer = $BossBiteCooldownTimer
 
+onready var cam = $Camera2D
+
+
+
+
 func _ready():
+	sprite2.visible = false
 	reset_player_state()
 	Global.connect("player_died", self, "_on_player_died")
 	# Connect the damage cooldown timer's timeout signal
@@ -55,7 +62,7 @@ func _ready():
 		print_debug("WARNING (Fishda): BossBiteCooldownTimer node not found! Add it as a child of Fishda.")
 
 
-# self explanatory
+# self explanatory EDI WWOOOOWWW!! ><
 func reset_player_state():
 	Global.current_size_points = 0
 	current_visual_scale = 1.0
@@ -82,17 +89,26 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("move_down"):
 		velocity.y += actual_speed
 
+	
 	move_and_slide(velocity)
 
 	if velocity.x < 0:
 		sprite.flip_h = false
 	elif velocity.x > 0:
 		sprite.flip_h = true
+	
+	if velocity.x < 0:
+		sprite2.flip_h = false
+	elif velocity.x > 0:
+		sprite2.flip_h = true
+			
+		
 
 # function for player growth
 # when called, will multiply accepted amount to scale factor growth
 # which in turn will make player visually grow
 func grow(amount: int):
+	Global.fish_eaten_count += 1
 	Global.current_size_points += amount
 	current_visual_scale = 1.0 + (Global.current_size_points * SCALE_FACTOR_PER_GROWTH_POINT)
 	current_visual_scale = clamp(current_visual_scale, MIN_VISUAL_SCALE, MAX_VISUAL_SCALE)
@@ -105,7 +121,10 @@ func update_visual_size():
 	if collision_shape:
 		collision_shape.scale = Vector2(current_visual_scale, current_visual_scale)
 	print("Player visual scale updated to: ", current_visual_scale)
-
+	if sprite2:
+		sprite2.scale = Vector2(current_visual_scale, current_visual_scale)
+		sprite2.position = Vector2(0, -sprite.texture.get_size().y * current_visual_scale * 0.0)
+		print("Player visual scale updated to: ", current_visual_scale)
 # moved to separate function for ease of use
 func _on_player_died():
 	print("FISHDA DIED! Game Over.")
@@ -117,7 +136,7 @@ func _on_player_died():
 # Function for eating fish food 
 func attempt_eat_food(food_item: BaseFishFood):
 	var can_eat = false
-	
+
 	# similar to switch case
 	# player needs to grow first before being able to eat meidum and large fish
 	match food_item.fish_food_size_category:
@@ -135,6 +154,8 @@ func attempt_eat_food(food_item: BaseFishFood):
 
 
 	if can_eat: # Successfully ate food
+		sprite.visible = false      # Hide closed-mouth
+		sprite2.visible = true      # Show open-mouth
 		Global.add_score(food_item.value)
 		grow(food_item.growth_points)
 		# wag niyo na intindihin tong nasa baba basta for logging lang to hahahaha
@@ -143,7 +164,16 @@ func attempt_eat_food(food_item: BaseFishFood):
 		
 		# Play eating sound effect
 	else: # Player CANNOT eat this food item
+		# Flash red when player tries to eat something too big
+		sprite.modulate = Color(1, 0.2, 0.2)  # Reddish tint
+		sprite2.modulate = Color(1, 0.2, 0.2)
+
+		yield(get_tree().create_timer(0.2), "timeout") # short duration
+
+		sprite.modulate = Color.white
+		sprite2.modulate = Color.white
 		# Tried to eat something too big
+		
 		if can_take_eat_attempt_damage: # Check if player can currently take this type of damage
 			Global.take_player_damage(food_item.damage_if_too_small)
 			print("Fishda tried to eat %s food but was too small! Took %s damage." % [Global.FishSize.keys()[food_item.fish_food_size_category], food_item.damage_if_too_small])
@@ -153,9 +183,19 @@ func attempt_eat_food(food_item: BaseFishFood):
 				damage_cooldown_timer.start() # Start the 2-second cooldown
 			
 			# Play "ouch" sound effect, maybe a small knockback or visual feedback
+			   # 👇 Camera shake effect
+			var shake_strength = 8
+			#cam.offset = Vector2(randf_range(-shake_strength, shake_strength), randf_range(-shake_strength, shake_strength))
+			#	await get_tree().create_timer(0.1).timeout
+			#	cam.offset = Vector2.ZERO
+			
 		else:
 			print("Fishda bumped into %s food but is currently immune to eating damage." % Global.FishSize.keys()[food_item.fish_food_size_category])
 			# can add some visual queues here too
+	
+	yield(get_tree().create_timer(0.3), "timeout")
+	sprite2.visible = false     # Hide open-mouth
+	sprite.visible = true       # Show closed-mouth again
 
 # This function is called when the DamageCooldownTimer times out
 func _on_DamageCooldownTimer_timeout():

@@ -12,7 +12,8 @@ var current_size_points := 0 setget set_current_size_points
 func set_current_size_points(value):
 	current_size_points = value
 	emit_signal("current_size_updated")
-
+#signals the fish count
+signal fish_eaten_updated(new_count)
 # Player Size Tiers for Eating
 # Example: player needs a "size points" of 20 to eat medium and 50 for large, can be changed for balancing
 export var CAN_EAT_MEDIUM_THRESHOLD = 20 
@@ -28,6 +29,11 @@ enum Buff { SPEED, REGEN, TIME_STOP }
 var player_current_health: int = 100
 const PLAYER_MAX_HEALTH: int = 3
 
+#for food count
+var fish_eaten_count := 0 setget set_fish_eaten_count
+
+
+
 # custom signals, pwede kayo gumawa ng sarili niyo if may naisip kayong application
 signal player_health_updated(new_health)
 signal player_died
@@ -42,10 +48,15 @@ func add_score(amount: int):
 	emit_signal("score_updated", current_score)
 	print("Global score is now: ", current_score)
 
-func reset_score():
+func reset_score(): ##I CCHANGED THIS FROM RESET_SCORE TO RESET STATE FOR FISH COUNT
 	current_score = 0
-	is_level_complete = false # Reset this too
+	is_level_complete = false
 	emit_signal("score_updated", current_score)
+
+	reset_player_stats()
+	current_size_points = 0
+	set_fish_eaten_count(0)
+
 
 func get_score() -> int:
 	return current_score
@@ -88,3 +99,11 @@ func _ready():
 	reset_score()
 	reset_player_stats() # Reset health on game/global start
 	pass
+
+#for food count
+func set_fish_eaten_count(value):
+	fish_eaten_count = value
+	print("Global: fish_eaten_count set to ", fish_eaten_count)
+	emit_signal("fish_eaten_updated", fish_eaten_count)
+
+

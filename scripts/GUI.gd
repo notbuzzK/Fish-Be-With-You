@@ -13,6 +13,7 @@ onready var game_over_menu = $GameOver
 onready var level_timer_node = $LevelTimer # Renamed for clarity, reference to Timer node
 onready var time_left_label = $CanvasLayer/TimeLeft
 
+
 # stars for level complete menu
 onready var s4 = $LevelComplete/PanelContainer/VBoxContainer/PanelContainer/Star1
 onready var s5 = $LevelComplete/PanelContainer/VBoxContainer/PanelContainer/Star2
@@ -23,7 +24,7 @@ onready var heart1= $Hearts/heart1
 onready var heart2 = $Hearts/heart2
 onready var heart3= $Hearts/heart3
 
-
+#for the progress bar lights up of fish
 onready var Medium_clr= $ProgressBar/Medium_clr
 onready var Large_clr= $ProgressBar/Large_clr
 
@@ -32,6 +33,11 @@ var medium_threshold = Global.CAN_EAT_MEDIUM_THRESHOLD
 var large_threshold = Global.CAN_EAT_LARGE_THRESHOLD
 var current_size = Global.current_size_points
 
+#pause menu
+onready var pause_menu = $PauseMenu
+
+#fishcount
+onready var fish_count= $CanvasLayer/FishCount
 
 # Time thresholds for LOSING stars (based on ELAPSED time)
 const LOSE_3RD_STAR_AFTER: float = 30.0  # After 30s, can only get max 2 stars
@@ -44,6 +50,7 @@ var current_potential_stars: int = 3 # Start with the potential for 3 stars
 var stars_earned_this_level: int = 0 # Final stars when level is completed
 
 func _ready():
+	Global.connect("fish_eaten_updated", self, "_on_fish_eaten_updated")
 	Global.connect("score_updated", self, "_on_Global_score_updated")
 	progressBar.max_value = score_to_complete_level
 	_on_Global_score_updated(Global.get_score())
@@ -70,6 +77,7 @@ func _ready():
 	update_time_display()
 	
 
+
 #INSERT FUNCTION FOR THE MEDIUM AND LARGE THRESHOLD, IF MEDIUM THRESHOLD IS TRUE, MEDIUM_CLR SHOULD BE VISIBLE.
 
 
@@ -77,6 +85,7 @@ func _ready():
 func _process(_delta):
 	update_time_display()
 	_on_Global_current_size()
+	
 	
 	
 	# Only update potential stars if the level is not yet complete and game not paused by a menu
@@ -167,7 +176,7 @@ func show_game_over_menu():
 # This function is called when the SCORE target is met
 func _on_Global_score_updated(new_score: int):
 	if score_label:
-		score_label.text = str(new_score)
+		score_label.text = str(new_score) + "/150"
 
 	if progressBar:
 		progressBar.value = new_score
@@ -248,6 +257,13 @@ func _on_LevelTimer_timeout():
 #		# Depending on game design, this could still be a "level complete" but with 0 stars,
 #		# or it could be a "level failed" if meeting TIME_FOR_1_STAR is mandatory.
 #		# For now, we assume it's 0 stars but level is still complete because score was met.
+
+#fishcount
+func _on_fish_eaten_updated(new_count: int):
+	if fish_count:
+		fish_count.text = str(new_count)
+	print("GUI: Fish count updated to ", new_count)
+
 
 
 # This function is called when the level is successfully completed by score
@@ -332,6 +348,5 @@ func _input(event):
 		print("Save Reset: changed to level 1")
 		Global.save_player_progress("res://src/levels/Level1.tscn")
 
-func _on_Settings_pressed():
-	get_tree().change_scene("res://src/scenes/Settings.tscn")
-	
+
+
