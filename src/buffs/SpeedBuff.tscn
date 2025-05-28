@@ -1,17 +1,25 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/403970123_203114046100340_6409654091407568398_n.jpg" type="Texture" id=1]
+[ext_resource path="res://sprites/power-ups/Speed-boost.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Buffs.gd" type="Script" id=2]
+[ext_resource path="res://scripts/JigglePhysx.gd" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 51, 61 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.3883
 
 [node name="SpeedBuff" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.24759, 0.235988 )
+position = Vector2( 13, -6 )
+scale = Vector2( 0.07, 0.066 )
 texture = ExtResource( 1 )
+script = ExtResource( 3 )
+jiggle_amplitude = 10.0
+jiggle_speed = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -2, 2 )
 shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_SpeedBuff_body_entered"]

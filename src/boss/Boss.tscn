@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprites/boss/BBM FISH KALABAN.png" type="Texture" id=1]
 [ext_resource path="res://scripts/bossBehavior.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/state/bossIdle.gd" type="Script" id=4]
 [ext_resource path="res://scripts/state/BossAttack.gd" type="Script" id=5]
 [ext_resource path="res://scripts/state/BossChase.gd" type="Script" id=6]
+[ext_resource path="res://src/boss/BossInkAttack.gd" type="Script" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.57449
@@ -43,6 +44,7 @@ initial_state_node_path = NodePath("BossIdle")
 script = ExtResource( 4 )
 max_wander_time = 6.0
 detection_radius = 500.0
+chance_to_ink_attack = 0.5
 
 [node name="BossAttack" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
@@ -51,6 +53,12 @@ script = ExtResource( 5 )
 script = ExtResource( 6 )
 chase_speed = 150.0
 
+[node name="BossInkAttack" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+
 [node name="DamageCooldownTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
+
+[node name="InkAttackCooldownTimer" type="Timer" parent="."]
 one_shot = true

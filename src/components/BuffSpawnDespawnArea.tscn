@@ -1,7 +1,61 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scripts/BuffSpawnArea.gd" type="Script" id=1]
 [ext_resource path="res://src/components/PlayArea.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Node2D
+
+# Assign power-up scenes in the editor
+export(PackedScene) var speed_buff_scene
+export(PackedScene) var regen_buff_scene
+export(PackedScene) var time_buff_scene
+
+export var spawn_interval: float = 5.0
+export var spawn_area_width: float = 500.0
+export var fall_speed: float = 100.0  # speed for all power-ups
+
+onready var spawn_point = $BuffSpawnArea
+onready var despawn_area = $BuffDespawnArea
+
+var active_powerups = []
+
+func _ready():
+	randomize()
+	despawn_area.connect(\"body_entered\", self, \"_on_DespawnArea_body_entered\")
+	_spawn_loop()
+
+func _spawn_loop():
+	spawn_random_powerup()
+	yield(get_tree().create_timer(spawn_interval), \"timeout\")
+	_spawn_loop()  # call again recursively
+
+func spawn_random_powerup():
+	var buff_scenes = [speed_buff_scene, regen_buff_scene, time_buff_scene]
+	var selected_scene = buff_scenes[randi() % buff_scenes.size()]
+	if selected_scene:
+		var buff_instance = selected_scene.instance()
+
+		# Set spawn position along X range
+		var x_pos = spawn_point.global_position.x + rand_range(-spawn_area_width / 2, spawn_area_width / 2)
+		var start_pos = Vector2(x_pos, spawn_point.global_position.y)
+		buff_instance.global_position = start_pos
+
+		# Attach fall script
+		var fall_script = preload(\"res://scripts/state/FallingPowerUp.gd\")
+		buff_instance.set_script(fall_script)
+		buff_instance.fall_speed = fall_speed
+
+		buff_instance.add_to_group(\"powerups\")
+		get_tree().get_root().add_child(buff_instance)
+		active_powerups.append(buff_instance)
+
+
+func _on_DespawnArea_body_entered(body):
+	if body.is_in_group(\"powerups\"):
+		print(\"Despawning power-up:\", body.name)
+		body.queue_free()
+		active_powerups.erase(body)
+"
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1768, 28 )
@@ -10,7 +64,7 @@ extents = Vector2( 1768, 28 )
 extents = Vector2( 1800, 29.5 )
 
 [node name="BuffSpawnDespawnArea" type="Node2D"]
-script = ExtResource( 1 )
+script = SubResource( 3 )
 
 [node name="BuffDespawnArea" type="Area2D" parent="."]
 

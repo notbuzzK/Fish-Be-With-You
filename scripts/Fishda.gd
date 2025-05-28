@@ -23,7 +23,7 @@ const SCALE_FACTOR_PER_GROWTH_POINT: float = 0.02 # How much 1 growth point affe
 var can_take_eat_attempt_damage: bool = true # Flag to control damage taking
 
 # movement params
-export var base_speed: int = 200
+export var base_speed: int = 250
 export var acceleration: float = 9.8 # not used, debating to use it or not
 
 var current_speed_multiplier: float = 1.0
@@ -39,6 +39,13 @@ export var BOSS_BITE_COOLDOWN_TIME: float = 1.0
 var can_bite_boss: bool = true
 onready var boss_bite_cooldown_timer = $BossBiteCooldownTimer
 
+
+var skin_textures = [
+	preload("res://sprites/fishda/ANGEL.png"),
+	preload("res://sprites/fishda/GEMMA.png"),
+	preload("res://sprites/fishda/TILAPYUHH.png")
+]
+
 func _ready():
 	reset_player_state()
 	Global.connect("player_died", self, "_on_player_died")
@@ -53,7 +60,8 @@ func _ready():
 		boss_bite_cooldown_timer.connect("timeout", self, "_on_BossBiteCooldownTimer_timeout")
 	else:
 		print_debug("WARNING (Fishda): BossBiteCooldownTimer node not found! Add it as a child of Fishda.")
-
+	var skin_index = clamp(Global.selected_skin_index, 0, skin_textures.size() - 1)
+	sprite.texture = skin_textures[skin_index]
 
 # self explanatory
 func reset_player_state():
@@ -216,7 +224,29 @@ func attempt_damage_entity(entity_to_damage: Node): # entity_to_damage will be t
 			# Play "failed bite" sound or some visual cues
 	else:
 		print("Fishda cannot bite boss yet (cooldown).")
+		
+ #When fishda gets hit by a trash
+func on_hit_trash(trash_node: Node):
+	if can_take_eat_attempt_damage:
+		Global.take_player_damage(1)
+		print("Fishda hit trash! Lost 1 heart.")
+		can_take_eat_attempt_damage = false
+		if damage_cooldown_timer:
+			damage_cooldown_timer.start()
+	else:
+		print("Fishda is still in damage cooldown from trash.")
+
 
 func _on_BossBiteCooldownTimer_timeout():
 	can_bite_boss = true
 	print("boss can be bitten again")
+	
+func heal_player(hearts: int): #fish logic
+	print("Healing Fishda by", hearts)
+	Global.heal_player(hearts)
+	
+func add_time(seconds: float):
+	print("Fishda: Adding time boost")
+	Global.add_time_to_timer(seconds)
+	
+

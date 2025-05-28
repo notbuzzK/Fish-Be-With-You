@@ -23,6 +23,10 @@ onready var heart1 = $Hearts/Heart1
 onready var heart2 = $Hearts/Star5
 onready var heart3 = $Hearts/Star6
 
+#Level label
+onready var level_label = $LevelLabel
+
+
 export var score_to_complete_level: int = 100
 
 # Time thresholds for LOSING stars (based on ELAPSED time)
@@ -36,6 +40,7 @@ var current_potential_stars: int = 3 # Start with the potential for 3 stars
 var stars_earned_this_level: int = 0 # Final stars when level is completed
 
 func _ready():
+	Global.connect("time_added", self, "_on_Global_time_added")
 	Global.connect("score_updated", self, "_on_Global_score_updated")
 	progressBar.max_value = score_to_complete_level
 	_on_Global_score_updated(Global.get_score())
@@ -64,7 +69,8 @@ func _ready():
 	heart1.modulate = Color.red
 	heart2.modulate = Color.red
 	heart3.modulate = Color.red
-
+	
+	
 
 # Called every frame
 func _process(_delta):
@@ -133,12 +139,18 @@ func _on_player_health_updated(new_health: int):
 		health_bar.value = new_health
 	print("GUI: Player health updated to ", new_health)
 	
-	if new_health == 0:
-		heart1.modulate = Color.black
-	if new_health <= 1:
-		heart2.modulate = Color.black
-	if new_health <= 2:
-		heart3.modulate = Color.black
+	# Reset all hearts to black first
+	heart1.modulate = Color.black
+	heart2.modulate = Color.black
+	heart3.modulate = Color.black
+
+	# Turn hearts red based on current health
+	if new_health >= 1:
+		heart1.modulate = Color.red
+	if new_health >= 2:
+		heart2.modulate = Color.red
+	if new_health >= 3:
+		heart3.modulate = Color.red
 
 func _on_Global_player_died(): # Connected to Global.player_died
 	print("GUI: Received player_died signal. Showing game over.")
@@ -278,6 +290,14 @@ func hide_level_complete_and_unpause():
 	# Only unpause if the pause menu ISN'T also trying to keep it paused
 	if get_tree().paused: # Only unpause if it was paused by level complete
 		get_tree().paused = false
+		
+func _on_Global_time_added(seconds: float):
+	if level_timer_node:
+		var new_time = level_timer_node.time_left + seconds
+		level_timer_node.stop()
+		level_timer_node.start(new_time)
+		print("GUI: Added", seconds, "seconds. New time:", new_time)
+
 
 func _on_Restart_pressed():
 #	print("DEBUG: _on_RetryLevelButton_pressed CALLED")
@@ -296,6 +316,7 @@ func _on_Continue_pressed():
 	Global.reset_player_stats()
 	print("Next Level button pressed")
 	get_tree().change_scene(Global.getter_for_path_next_scene())
+
 
 func _on_MainMenu_pressed():
 #	print("DEBUG: _on_LC_MainMenuButton_pressed CALLED")

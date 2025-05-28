@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/power-ups/addTime.png" type="Texture" id=1]
+[ext_resource path="res://scripts/addTime.gd" type="Script" id=2]
+[ext_resource path="res://scripts/JigglePhysx.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 34.2345
+
+[node name="addTime" type="Area2D"]
+script = ExtResource( 2 )
+time_to_add = 7.0
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 9, -11 )
+scale = Vector2( 0.066, 0.066 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+jiggle_amplitude = 10.0
+jiggle_speed = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

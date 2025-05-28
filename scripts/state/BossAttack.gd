@@ -16,13 +16,15 @@ var phase_timer: float = 0.0
 
 func enter(boss_owner_node):
 #	print("Entering BossAttack State - Windup")
-#	var which_attack_to_use = randi() % 2
-#	print("attack number", which_attack_to_use)
-#
-#	if which_attack_to_use == 1:
-#		current_phase = AttackPhase.WINDUP
-#	else:
-#		current_phase = InkAttack.WINDUP
+	var which_attack_to_use = randf()
+	print("attack number: ", which_attack_to_use)
+
+	if which_attack_to_use >= 0.51:
+		current_phase = AttackPhase.WINDUP
+		print("Attack Phase Windup")
+	else:
+		current_phase = InkAttack.WINDUP
+		print("Ink Attack Phase Windup")
 	
 	self.owner_boss = boss_owner_node
 	self.player_target = owner_boss.player_is_in_boss_attack_zone # Get player target from boss behavior

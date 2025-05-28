@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/boss/InkAttackEffect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Fishda.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/Camera.gd" type="Script" id=4]
+[ext_resource path="res://src/components/PauseMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/components/GUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/levelBG_FG/level1/LEVEL 1- fg (2).png" type="Texture" id=7]
+[ext_resource path="res://assets/levelBG_FG/level1/LEVEL 1-bg (1).png" type="Texture" id=8]
+[ext_resource path="res://src/boss/Boss.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scripts/levels/Level1.gd" type="Script" id=10]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource( 10 )
+
+[node name="Boss" parent="." instance=ExtResource( 9 )]
+camera_node_path = NodePath("../MainCamera")
+
+[node name="Fishda" parent="." instance=ExtResource( 2 )]
+position = Vector2( 438, 323 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource( 6 )]
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="PauseMenu" instance=ExtResource( 5 )]
+rect_rotation = -0.083809
+
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2( 659, 348 )
+current = true
+zoom = Vector2( 2, 2 )
+limit_left = -1709
+limit_top = -961
+limit_right = 1710
+limit_bottom = 963
+smoothing_enabled = true
+smoothing_speed = 7.0
+editor_draw_screen = false
+editor_draw_limits = true
+script = ExtResource( 4 )
+
+[node name="FG" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Level1-Fg(2)" type="Sprite" parent="FG"]
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 7 )
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -2
+follow_viewport_enable = true
+
+[node name="Level1-bg(1)" type="Sprite" parent="BG"]
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 8 )
+
+[node name="EffectsCanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="InkAttackOverlay" parent="EffectsCanvasLayer" instance=ExtResource( 1 )]
+
+[connection signal="trigger_ink_overlay" from="Boss" to="EffectsCanvasLayer/InkAttackOverlay" method="trigger_effect"]

@@ -17,8 +17,8 @@ func _ready():
 	else:
 		print_debug("No boss found in 'bosses' group to connect defeat signal.")
 	
-	Global.get_path_to_next_scene("res://src/levels/Level2.tscn")
-	
+	Global.advance_to_next_level()
+
 func onPlayerTakeDamageFromTrash():
 	Global.take_player_damage(1)
 

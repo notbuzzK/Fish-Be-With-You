@@ -227,6 +227,13 @@ margin_right = 286.0
 margin_bottom = 76.0
 text = "MainMenu"
 
+[node name="Level" type="Label" parent="."]
+margin_left = 996.0
+margin_top = 34.0
+margin_right = 1076.0
+margin_bottom = 60.0
+text = "Level: 1"
+
 [connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="LevelComplete/PanelContainer/VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]

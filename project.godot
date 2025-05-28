@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/state/bossIdle.gd"
 }, {
+"base": "State",
+"class": "BossInkAttackState",
+"language": "GDScript",
+"path": "res://src/boss/BossInkAttack.gd"
+}, {
+"base": "Area2D",
+"class": "Buffs",
+"language": "GDScript",
+"path": "res://scripts/Buffs.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -38,20 +48,16 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://scripts/state/StateMachine.gd"
-}, {
-"base": "Area2D",
-"class": "buffs",
-"language": "GDScript",
-"path": "res://scripts/Buffs.gd"
 } ]
 _global_script_class_icons={
 "BaseFishFood": "",
 "BossAttackState": "",
 "BossChaseState": "",
 "BossIdleState": "",
+"BossInkAttackState": "",
+"Buffs": "",
 "State": "",
-"StateMachine": "",
-"buffs": ""
+"StateMachine": ""
 }
 
 [application]
@@ -121,4 +127,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://src/default_env.tres"

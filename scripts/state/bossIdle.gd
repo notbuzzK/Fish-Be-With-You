@@ -9,6 +9,8 @@ var player_node # Cache player reference if found
 export var min_wander_time: float = 1.5
 export var max_wander_time: float = 4.0
 export var detection_radius: float = 300.0
+export var chance_to_ink_attack: float = 0.1 # 10% chance per second (example)
+var time_since_last_ink_check: float = 0.0
 
 var move_direction: Vector2 = Vector2.ZERO
 var current_wander_timer: float = 0.0
@@ -41,6 +43,20 @@ func update(delta, boss_owner_node):
 		if players_in_scene.size() > 0:
 			player_node = players_in_scene[0]
 
+	# --- Ink Attack Check ---
+	time_since_last_ink_check += delta
+	if time_since_last_ink_check >= 1.0: 
+		time_since_last_ink_check = 0.0
+		# Check the boss's own cooldown flag
+		if owner_boss and owner_boss.can_use_ink_attack: # Accessing var from bossBehavior.gd
+			if randf() < chance_to_ink_attack:
+				print_debug(self.name + ": Telling boss to perform ink attack action.")
+				if owner_boss.has_method("perform_ink_attack_action"):
+					owner_boss.perform_ink_attack_action() 
+					# The boss STAYS in this Idle/Chase state. Its movement continues.
+					# The boss might play a quick "firing" animation here.
+
+	# Must be after other transition checks to avoid being overridden in same frame
 	if is_instance_valid(player_node) and is_instance_valid(owner_boss):
 		if owner_boss.global_position.distance_to(player_node.global_position) < detection_radius:
 			emit_signal("transitioned", "BossChase")

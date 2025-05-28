@@ -17,6 +17,20 @@ export var boss_health: int = 3
 onready var boss_damage_cooldown_timer = $DamageCooldownTimer
 var can_boss_be_damaged: bool = true # Flag for damage cooldown
 
+# --- Ink Attack ---
+#export (PackedScene) var ink_attack_effect_scene: PackedScene
+export var ink_attack_cooldown_time: float = 10.0 # Time between ink attacks
+#export var ink_attack_duration: float = 3.0     # How long the ink stays on screen
+
+var can_use_ink_attack: bool = true
+onready var ink_attack_cooldown_timer = $InkAttackCooldownTimer # ADD THIS TIMER TO BOSS.TSCN
+
+# --- Exported NodePath for the Camera ---
+export (NodePath) var camera_node_path
+onready var game_camera_node: Camera2D
+
+# New signal to tell the pre-placed ink effect to activate
+signal trigger_ink_overlay
 signal boss_defeated
 
 func _ready():
@@ -35,6 +49,17 @@ func _ready():
 		boss_damage_cooldown_timer.connect("timeout", self, "_on_BossDamageCooldownTimer_timeout")
 	else:
 		print_debug("ERROR (BossBehavior): BossDamageCooldownTimer node not found! Add it as a child of the Boss.")
+
+	# Setup Ink Attack Cooldown Timer
+	var iac_timer_node = get_node_or_null("InkAttackCooldownTimer")
+	if iac_timer_node:
+		ink_attack_cooldown_timer = iac_timer_node
+		ink_attack_cooldown_timer.one_shot = true # Ensure it's one shot
+		ink_attack_cooldown_timer.wait_time = ink_attack_cooldown_time # Set its wait time
+		ink_attack_cooldown_timer.connect("timeout", self, "_on_InkAttackCooldownTimer_timeout")
+	else:
+		print_debug("ERROR (BossBehavior): InkAttackCooldownTimer node not found! Add it as a child of the Boss.")
+
 
 # Called by states to set the direction of movement
 func set_movement_direction(direction: Vector2):
@@ -143,3 +168,21 @@ func boss_defeated_actions():
 			state_machine.current_state = null
 	hide()
 
+func _on_InkAttackCooldownTimer_timeout():
+	can_use_ink_attack = true
+	print_debug("Boss: Ink Attack ready again.")
+
+# Called by a Boss State (e.g., a very short BossFireInkState or directly from Idle/Chase)
+func perform_ink_attack_action(): # Renamed to avoid confusion with old method
+	if not can_use_ink_attack:
+		print_debug("BossBehavior: Tried to ink attack, but it's on cooldown by the boss.")
+		return false # Attack couldn't be performed
+
+	print_debug("BOSS INITIATING INK ATTACK (emitting signal)!")
+	emit_signal("trigger_ink_overlay") # Emit the signal
+
+	can_use_ink_attack = false # Put boss's ink ability on cooldown
+	if ink_attack_cooldown_timer:
+		ink_attack_cooldown_timer.start()
+
+	return true # Signal emitted

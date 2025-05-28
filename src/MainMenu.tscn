@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/buttons/btn2-state1.png" type="Texture" id=1]
 [ext_resource path="res://assets/buttons/btn1-state1.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/403970123_203114046100340_6409654091407568398_n.jpg" type="Texture" id=6]
 [ext_resource path="res://assets/buttons/btn3-state1.png" type="Texture" id=7]
 [ext_resource path="res://assets/buttons/btn3-state2.png" type="Texture" id=8]
+[ext_resource path="res://scripts/JigglePhysx2.gd" type="Script" id=9]
 [ext_resource path="res://assets/buttons/settings-txt.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxTexture" id=1]
@@ -76,6 +77,7 @@ rect_clip_content = true
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
+script = ExtResource( 9 )
 
 [node name="LoadGame" type="Button" parent="Control"]
 anchor_right = 1.0
@@ -87,6 +89,7 @@ margin_bottom = -273.0
 custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 5 )
 custom_styles/normal = SubResource( 6 )
+script = ExtResource( 9 )
 
 [node name="ChangeAppearance" type="Button" parent="Control"]
 anchor_right = 1.0
@@ -98,6 +101,7 @@ margin_bottom = -277.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/normal = SubResource( 9 )
+script = ExtResource( 9 )
 
 [node name="Settings" type="Button" parent="Control"]
 anchor_right = 1.0

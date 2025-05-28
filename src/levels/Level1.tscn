@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://src/components/DebrisSpawn.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Fishda.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/components/PlayArea.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/Camera.gd" type="Script" id=4]
 [ext_resource path="res://src/components/PauseMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/components/GUI.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/boss/Boss.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/levelBG_FG/level1/LEVEL 1-bg (1).png" type="Texture" id=8]
 [ext_resource path="res://assets/levelBG_FG/level1/LEVEL 1- fg (2).png" type="Texture" id=9]
 [ext_resource path="res://scripts/levels/Level1.gd" type="Script" id=10]
+[ext_resource path="res://src/components/BuffSpawnDespawn.tscn" type="PackedScene" id=13]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 10 )
@@ -18,8 +19,6 @@ script = ExtResource( 10 )
 [node name="Fishda" parent="." instance=ExtResource( 2 )]
 position = Vector2( 438, 323 )
 scale = Vector2( 0.05, 0.05 )
-
-[node name="Boss" parent="." instance=ExtResource( 7 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -50,10 +49,11 @@ script = ExtResource( 4 )
 target_node_path = NodePath("../Fishda")
 
 [node name="FG" type="CanvasLayer" parent="."]
-layer = 2
-visible = false
+layer = 0
+follow_viewport_enable = true
 
 [node name="Level1-Fg(2)" type="Sprite" parent="FG"]
+scale = Vector2( 0.745, 0.745 )
 texture = ExtResource( 9 )
 
 [node name="BG" type="CanvasLayer" parent="."]
@@ -61,5 +61,11 @@ layer = -2
 follow_viewport_enable = true
 
 [node name="Level1-bg(1)" type="Sprite" parent="BG"]
-scale = Vector2( 0.75, 0.75 )
+scale = Vector2( 0.745, 0.745 )
 texture = ExtResource( 8 )
+
+[node name="PlayArea2" parent="." instance=ExtResource( 13 )]
+position = Vector2( -4, -3 )
+
+[node name="DebrisSpawn" parent="." instance=ExtResource( 1 )]
+position = Vector2( -6, -9 )

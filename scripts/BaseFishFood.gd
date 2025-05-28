@@ -58,6 +58,10 @@ func _physics_process(delta):
 	if dist_sq > stop_threshold * stop_threshold:
 		var direction = to_target.normalized()
 		global_position += direction * speed * delta
+		
+		# ✅ Flip the sprite if moving left/right
+		if direction.x != 0:
+			$Sprite.flip_h = direction.x > 0
 	else:
 		global_position = target_position
 
