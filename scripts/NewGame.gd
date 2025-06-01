@@ -5,5 +5,6 @@ func _ready():
 
 # connect to node tab
 func _on_Button_pressed():
-	get_tree().change_scene("res://src/levels/Level1.tscn")
+	get_tree().change_scene("res://src/components/how2play.tscn")
 	print("Hello World")
+

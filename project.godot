@@ -63,6 +63,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://scripts/Global.gd"
+MusicManager="*res://assets/music/music.tscn"
 
 [display]
 

@@ -1,7 +1,50 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://scripts/SettingsMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/buttons/bg.png" type="Texture" id=1]
 [ext_resource path="res://scripts/ChangeControls.gd" type="Script" id=2]
+[ext_resource path="res://assets/Settings/wasd state 2.png" type="Texture" id=3]
+[ext_resource path="res://assets/Settings/Sound Effects.png" type="Texture" id=5]
+[ext_resource path="res://assets/Settings/line.png" type="Texture" id=6]
+[ext_resource path="res://assets/Settings/bg.png" type="Texture" id=7]
+[ext_resource path="res://assets/Settings/arrows state 2.png" type="Texture" id=8]
+[ext_resource path="res://assets/Settings/may sound btn.png" type="Texture" id=9]
+[ext_resource path="res://assets/Settings/Music.png" type="Texture" id=10]
+[ext_resource path="res://assets/Settings/pearl adjuster.png" type="Texture" id=11]
+[ext_resource path="res://assets/Settings/mute btn.png" type="Texture" id=12]
+[ext_resource path="res://assets/Settings/back.png" type="Texture" id=13]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Control
+
+
+onready var settings_scene = $\".\"
+export var used_in_main_menu: bool = true # flag
+
+
+
+func _ready():
+	pass # Replace with function body.
+
+# hulaan niyo para san to, gcash sa makaka hula #SHAGIDI SHAGIDI SHA POW POW !
+func _on_FullScreenbutton_toggled(button_pressed):
+	OS.window_fullscreen = button_pressed
+
+
+func _on_back_pressed():
+	if used_in_main_menu:
+		get_tree().change_scene(\"res://src/MainMenu.tscn\")
+		
+	else:
+		settings_scene.visible = false
+"
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 478, 340 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 478, 340 )
 
 [node name="Settings" type="Control"]
 anchor_left = 0.5
@@ -12,7 +55,7 @@ margin_left = -640.0
 margin_top = -360.0
 margin_right = 640.0
 margin_bottom = 360.0
-script = ExtResource( 1 )
+script = SubResource( 3 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_left = 0.5
@@ -23,6 +66,13 @@ margin_left = -160.0
 margin_top = -139.0
 margin_right = 160.0
 margin_bottom = 139.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PanelContainer"]
+
+[node name="Background" type="Sprite" parent="PanelContainer"]
+position = Vector2( 155.5, 140.893 )
+scale = Vector2( 0.211167, 0.21399 )
+texture = ExtResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 margin_left = 7.0
@@ -62,13 +112,63 @@ margin_top = 20.0
 margin_right = 306.0
 margin_bottom = 34.0
 
-[node name="Button" type="Button" parent="."]
-margin_left = 23.0
-margin_top = 16.0
-margin_right = 116.0
-margin_bottom = 67.0
-text = "Back"
+[node name="ModalBg" type="Sprite" parent="PanelContainer"]
+position = Vector2( 157, 144.255 )
+scale = Vector2( 0.263072, 0.272361 )
+texture = ExtResource( 7 )
+
+[node name="Line" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( 345.913, 68.8228 )
+scale = Vector2( 1.49346, 1 )
+texture = ExtResource( 6 )
+
+[node name="Line2" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( 349.714, 314.82 )
+scale = Vector2( 1.49346, 1 )
+texture = ExtResource( 6 )
+
+[node name="SoundEffects" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( -1015.18, 304.561 )
+texture = ExtResource( 5 )
+
+[node name="MaySoundBtn" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( -496.375, 68.2593 )
+texture = ExtResource( 9 )
+
+[node name="Music" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( -832.677, 78.4475 )
+texture = ExtResource( 10 )
+
+[node name="PearlAdjuster" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( 969.316, 54.1362 )
+scale = Vector2( 1.21114, 1.16778 )
+texture = ExtResource( 11 )
+
+[node name="PearlAdjuster2" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( -269.888, 303.805 )
+scale = Vector2( 1.18935, 1.11022 )
+texture = ExtResource( 11 )
+
+[node name="ArrowsState2" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( 463.752, 821.5 )
+texture = ExtResource( 8 )
+
+[node name="WasdState2" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( -448.547, 821.5 )
+texture = ExtResource( 3 )
+
+[node name="MuteBtn" type="Sprite" parent="PanelContainer/ModalBg"]
+position = Vector2( -492.202, 316.919 )
+texture = ExtResource( 12 )
+
+[node name="back" type="Button" parent="."]
+margin_left = 25.0
+margin_top = 13.0
+margin_right = 97.0
+margin_bottom = 61.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 
 [connection signal="toggled" from="PanelContainer/VBoxContainer/FullScreenbutton" to="." method="_on_FullScreenbutton_toggled"]
 [connection signal="item_selected" from="PanelContainer/VBoxContainer/ChangeControls" to="PanelContainer/VBoxContainer/ChangeControls" method="_on_ChangeControls_item_selected"]
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
